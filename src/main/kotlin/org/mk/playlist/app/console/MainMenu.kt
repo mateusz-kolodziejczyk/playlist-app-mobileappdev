@@ -1,6 +1,11 @@
 package org.mk.playlist.app.console
 
-fun runMainMenu(){
+import org.mk.playlist.app.models.Artist
+import org.mk.playlist.app.models.Playlist
+import org.mk.playlist.app.models.Song
+
+// Pass array lists used in main so that the menu can modify them
+fun runMainMenu(artists: ArrayList<Artist>, songs: ArrayList<Song>,  playlists: ArrayList<Playlist>){
     var option : Int = 0
     var input: String?
     do{
