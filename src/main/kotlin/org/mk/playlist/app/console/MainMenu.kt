@@ -23,6 +23,8 @@ fun runMainMenu(){
 
 private fun mainMenuOptions(option: Int){
     when(option){
-
+        1 -> runPlaylistMenu()
+        2 -> runSongMenu()
+        3 -> runArtistMenu()
     }
 }
