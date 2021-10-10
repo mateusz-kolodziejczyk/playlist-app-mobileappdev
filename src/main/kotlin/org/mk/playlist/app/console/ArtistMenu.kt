@@ -1,6 +1,9 @@
 package org.mk.playlist.app.console
 
-fun runArtistMenu(){
+import org.mk.playlist.app.models.Artist
+import org.mk.playlist.app.models.validateArtist
+
+fun runArtistMenu(artists: ArrayList<Artist>){
     var option : Int = 0
     var input: String?
     do{
@@ -16,18 +19,31 @@ fun runArtistMenu(){
             input.toInt()
         else
             -9
-        artistMenuOptions((option))
+        artistMenuOptions(option, artists)
     }while(option != -1)
 
 }
 
-private fun artistMenuOptions(option: Int){
+private fun artistMenuOptions(option: Int, artists: ArrayList<Artist>){
     when(option){
-        1 -> runPlaylistMenu()
-        2 -> runSongMenu()
+        1 -> addArtist(artists)
+        // 2 -> listAllArtists(artists)
     }
 }
-// Returns true if added artist, false if didn't
-private fun addArtist() : Boolean{
-    return true
+
+private fun addArtist(artists:ArrayList<Artist>){
+    println("Add an Artist")
+    println("First Name: ")
+    var firstName = readLine()!!
+    println("Last Name: ")
+    var lastName = readLine()!!
+    if(validateArtist(firstName, lastName)){
+        artists.add(Artist(id = artists.size.toLong(), firstName = firstName, lastName = lastName))
+        println("Artist added [$firstName $lastName]")
+    }
+    else{
+        println("Artist not added, not all fields were filled out.")
+    }
+
 }
+

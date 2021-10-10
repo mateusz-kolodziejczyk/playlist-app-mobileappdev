@@ -5,3 +5,10 @@ data class Artist (
     var firstName: String = "",
     var lastName: String = ""
     )
+
+fun validateArtist(firstName: String, lastName: String) : Boolean{
+    if(firstName.isNotEmpty() && lastName.isNotEmpty()){
+        return true
+    }
+    return false
+}

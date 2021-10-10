@@ -22,14 +22,14 @@ fun runMainMenu(artists: ArrayList<Artist>, songs: ArrayList<Song>,  playlists: 
             input.toInt()
         else
             -9
-        mainMenuOptions(option)
+        mainMenuOptions(option, artists)
     }while(option != -1)
 }
 
-private fun mainMenuOptions(option: Int){
+private fun mainMenuOptions(option: Int, artists: ArrayList<Artist>){
     when(option){
         1 -> runPlaylistMenu()
         2 -> runSongMenu()
-        3 -> runArtistMenu()
+        3 -> runArtistMenu(artists)
     }
 }
