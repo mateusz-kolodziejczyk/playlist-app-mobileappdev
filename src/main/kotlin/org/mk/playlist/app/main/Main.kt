@@ -1,10 +1,10 @@
 package org.mk.playlist.app.main
 
 import mu.KotlinLogging
-import org.mk.playlist.app.console.runMainMenu
-import org.mk.playlist.app.models.Artist
-import org.mk.playlist.app.models.Playlist
-import org.mk.playlist.app.models.Song
+import org.mk.playlist.app.views.console.runMainMenu
+import org.mk.playlist.app.models.artist.Artist
+import org.mk.playlist.app.models.playlist.Playlist
+import org.mk.playlist.app.models.song.Song
 
 private val logger = KotlinLogging.logger {}
 

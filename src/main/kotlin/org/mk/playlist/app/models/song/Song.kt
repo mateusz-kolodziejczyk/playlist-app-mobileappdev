@@ -1,4 +1,6 @@
-package org.mk.playlist.app.models
+package org.mk.playlist.app.models.song
+
+import org.mk.playlist.app.models.artist.Artist
 
 data class Song (
     var id: Long = 0,
