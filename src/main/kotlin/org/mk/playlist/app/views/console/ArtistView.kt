@@ -2,6 +2,7 @@ package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.artist.ArtistMemStore
+import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.artist.validateArtist
 
 class ArtistView() {
@@ -35,6 +36,14 @@ class ArtistView() {
         } else {
             return null
             println("Artist not added, not all fields were filled out.")
+        }
+    }
+
+    fun listAll(artists: MutableList<Artist>){
+        println("List of all Artists")
+        println("")
+        for(artist in artists){
+            println("${artist.id}: ${artist.firstName} ${artist.lastName}")
         }
     }
 }

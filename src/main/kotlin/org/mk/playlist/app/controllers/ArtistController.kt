@@ -14,6 +14,7 @@ class ArtistController {
             var option = artistView.runArtistMenu()
             when (option) {
                 1 -> add(artistView.addArtist(), artists)
+                2 -> artistView.listAll(artists.findAll())
             }
         } while (option != -1)
     }

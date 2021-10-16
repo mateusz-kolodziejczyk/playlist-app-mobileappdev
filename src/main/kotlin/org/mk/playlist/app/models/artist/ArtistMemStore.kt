@@ -15,6 +15,9 @@ class ArtistMemStore : ArtistStore {
         artists[artist.id] = artist
         logAll()
     }
+    override fun findAll() : ArrayList<Artist>{
+        return ArrayList(artists.values)
+    }
     private fun logAll() {
         artists.values.forEach { logger.info("$it") }
     }
