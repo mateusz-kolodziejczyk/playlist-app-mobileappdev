@@ -1,7 +1,7 @@
 package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.artist.Artist
-import org.mk.playlist.app.models.artist.validateArtist
+import org.mk.playlist.app.models.song.Song
 
 class SongView() {
     fun runSongMenu(): Int {
@@ -23,26 +23,29 @@ class SongView() {
         return option
     }
 
-    fun addArtist() : Artist? {
-        println("Add an Artist")
-        println("First Name: ")
-        var firstName = readLine()!!
-        println("Last Name: ")
-        var lastName = readLine()!!
-        if (validateArtist(firstName, lastName)) {
-            return Artist(firstName = firstName, lastName = lastName)
-            println("Artist added [$firstName $lastName]")
-        } else {
-            return null
-            println("Artist not added, not all fields were filled out.")
+    fun addSong() : Song? {
+        println("Add a Song")
+        // Ask the user whether they want to see a full list of artists
+        print("\nDo you wish to see a full list of artists? (Y/N): ")
+        var option = readLine()!!.uppercase()
+        if(option == "Y") {
+
         }
+        print("\nArtist id: ")
+        var artistId = readLine()!!.toLong()
+        // Check to see that an artist with that ID exists
+        print("\nSong Name: ")
+        var artist = Artist()
+        var name = readLine()!!
+        print("\nYear of Release: ")
+        var year = readLine()!!
+        var newSong = Song(name, year, artist)
+        return newSong
     }
 
-    fun listAll(artists: MutableList<Artist>){
-        println("List of all Artists")
+    fun listAll(songs: MutableList<Song>){
+        println("List of all Songs")
         println("")
-        for(artist in artists){
-            println("${artist.id}: ${artist.firstName} ${artist.lastName}")
-        }
+
     }
 }

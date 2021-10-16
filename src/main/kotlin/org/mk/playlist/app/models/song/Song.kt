@@ -7,7 +7,15 @@ data class Song (
     var title: String = "",
     var year: String = "",
     var artist: Artist = Artist(), ){
-        override fun toString() : String{
-            return "$id: $title by $artist in $year"
+    companion object{
+        operator fun invoke(title: String, year: String, artist: Artist) : Song?{
+            // If either name field is blank, return a null artist
+            return if(title.isEmpty() || year.isEmpty()){
+                null
+            }
+            else{
+                Song(title = title, year = year, artist = artist)
+            }
         }
     }
+}

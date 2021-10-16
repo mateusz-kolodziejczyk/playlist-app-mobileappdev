@@ -41,7 +41,7 @@ class ArtistView() {
         println("List of all Artists")
         println("")
         for(artist in artists){
-            println("${artist.id}: ${artist.firstName} ${artist.lastName}")
+            println(artist)
         }
     }
 }

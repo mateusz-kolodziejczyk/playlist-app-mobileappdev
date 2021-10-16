@@ -16,6 +16,8 @@ class SongController {
         do {
             var option = songView.runSongMenu()
             when (option) {
+                1 -> add(songView.addSong(), songs)
+                2 -> songView.listAll(songs.findAll())
             }
         } while (option != -1)
     }
