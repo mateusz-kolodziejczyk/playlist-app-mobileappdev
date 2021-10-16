@@ -1,16 +1,13 @@
 package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.artist.Artist
-import org.mk.playlist.app.models.artist.ArtistMemStore
-import org.mk.playlist.app.models.artist.ArtistStore
-import org.mk.playlist.app.models.artist.validateArtist
 
 class ArtistView() {
     fun runArtistMenu(): Int {
         var option: Int = 0
         var input: String?
         // The main menu allows the user to go to one of the submenus
-        println("MAIN MENU")
+        println("ARTIST MENU")
         println(" 1. Add Artist")
         println(" 2. List all Artists")
         println("-1. Return to Main Menu")
@@ -26,17 +23,18 @@ class ArtistView() {
 
     fun addArtist() : Artist? {
         println("Add an Artist")
-        println("First Name: ")
+        print("\nFirst Name: ")
         var firstName = readLine()!!
-        println("Last Name: ")
+        print("\nLast Name: ")
         var lastName = readLine()!!
-        if (validateArtist(firstName, lastName)) {
-            return Artist(firstName = firstName, lastName = lastName)
+        // Using the data validation, the artist will be null if either name field is empty.
+        var newArtist = Artist(firstName, lastName)
+        if (newArtist != null) {
             println("Artist added [$firstName $lastName]")
         } else {
-            return null
             println("Artist not added, not all fields were filled out.")
         }
+        return newArtist
     }
 
     fun listAll(artists: MutableList<Artist>){

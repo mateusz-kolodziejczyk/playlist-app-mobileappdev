@@ -23,7 +23,7 @@ class ArtistController {
             artistStore.add(artist)
         }
         else{
-            logger.info("Artist not added")
+            logger.info("\nArtist not added")
         }
     }
 }

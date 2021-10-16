@@ -13,12 +13,11 @@ class ArtistMemStore : ArtistStore {
     override fun add(artist: Artist){
         artist.id = getId()
         artists[artist.id] = artist
-        logAll()
     }
     override fun findAll() : ArrayList<Artist>{
         return ArrayList(artists.values)
     }
-    private fun logAll() {
-        artists.values.forEach { logger.info("$it") }
+    fun logAll() {
+        artists.values.forEach { logger.info("\n$it") }
     }
 }
