@@ -11,8 +11,18 @@ class PlaylistController {
         do {
             var option = view.runPlaylistMenu()
             when (option) {
-
+                1 -> createPlaylist()
+                2 -> addToPlaylist()
+                3 -> true
             }
         } while (option != -1)
+    }
+
+    fun createPlaylist(){
+
+    }
+
+    fun addToPlaylist(){
+
     }
 }
