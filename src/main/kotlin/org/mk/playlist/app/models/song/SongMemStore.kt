@@ -1,5 +1,6 @@
 package org.mk.playlist.app.models.song
 import mu.KotlinLogging
+import org.mk.playlist.app.utilities.logAll
 
 private val logger = KotlinLogging.logger {}
 var lastId = 0L
@@ -14,12 +15,9 @@ class SongMemStore : SongStore {
     override fun add(song: Song){
         song.id = getId()
         songs[song.id] = song
-        logAll()
+        logAll(songs.values, logger)
     }
     override fun findAll() : ArrayList<Song>{
         return ArrayList(songs.values)
-    }
-    fun logAll() {
-        songs.values.forEach { logger.info("\n$it") }
     }
 }

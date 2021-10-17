@@ -36,8 +36,4 @@ class ArtistMemStore : ArtistStore {
         add(Artist(firstName = "Carly", lastName = "Rae Jepsen"))
         add(Artist(firstName = "Taylor", lastName = "Swift"))
     }
-
-    fun logAll() {
-        artists.values.forEach { logger.info("\n$it") }
-    }
 }
