@@ -1,7 +1,9 @@
 package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.artist.Artist
+import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.song.Song
+import java.lang.NumberFormatException
 
 class SongView() {
     fun runSongMenu(): Int {
@@ -23,24 +25,44 @@ class SongView() {
         return option
     }
 
-    fun addSong() : Song? {
+    fun addSong(artists: ArtistStore): Song? {
         println("Add a Song")
+        // Quit out immediately if there are no valid artists.
+        if (artists.isEmpty()) {
+            println("\nThere are no artists in the database. Please add an artist before adding a song.")
+            return null
+        }
+
         // Ask the user whether they want to see a full list of artists
         print("\nDo you wish to see a full list of artists? (Y/N): ")
         var option = readLine()!!.uppercase()
-        if(option == "Y") {
-
+        if (option == "Y") {
+            artists.findAll().forEach { artist -> println(artist) }
         }
-        print("\nArtist id: ")
-        var artistId = readLine()!!.toLong()
-        // Check to see that an artist with that ID exists
+        var artistId = -2L
+        var artist: Artist? = null
+        // Do the loop until a valid artist has been found, or the user decides to cancel.
+        while (artist == null || artistId == -1L) {
+            print("\nAdd an artist by ID. Input -1 for ID to cancel adding a song.")
+            print("\nArtist id: ")
+            try {
+                artistId = readLine()!!.toLong()
+            } catch (exception: NumberFormatException) {
+                println("Not a valid id, please type in a number")
+            }
+            // Try to find the artist using the id provided
+            // The while loop will stop if an artist was found
+            artist = artists.findOne(artistId)
+            if(artist == null){
+                print("\n\nNo artist was found with id [$artistId]")
+            }
+        }
+
         print("\nSong Name: ")
-        var artist = Artist()
         var name = readLine()!!
         print("\nYear of Release: ")
         var year = readLine()!!
-        var newSong = Song(name, year, artist)
-        return newSong
+        return Song(name, year, artist)
     }
 
     fun listAll(songs: MutableList<Song>){

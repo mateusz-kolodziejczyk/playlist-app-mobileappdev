@@ -16,7 +16,7 @@ class SongController {
         do {
             var option = songView.runSongMenu()
             when (option) {
-                1 -> add(songView.addSong(), songs)
+                1 -> add(songView.addSong(artists), songs)
                 2 -> songView.listAll(songs.findAll())
             }
         } while (option != -1)
@@ -26,7 +26,7 @@ class SongController {
             songStore.add(song)
         }
         else{
-            logger.info("Artist not added")
+            logger.info("Song not added")
         }
     }
 }

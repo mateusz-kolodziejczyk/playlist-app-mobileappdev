@@ -9,13 +9,27 @@ internal fun getId(): Long {
 }
 class ArtistMemStore : ArtistStore {
     // Use a map with K,V ID, Artist to make retrieval easier.
-    val artists : MutableMap<Long,Artist> = mutableMapOf()
+    val artists : HashMap<Long,Artist> = HashMap()
     override fun add(artist: Artist){
         artist.id = getId()
         artists[artist.id] = artist
     }
+
+    override fun isEmpty() : Boolean{
+        return artists.isEmpty()
+    }
     override fun findAll() : ArrayList<Artist>{
         return ArrayList(artists.values)
+    }
+
+    override fun findOne(id: Long): Artist? {
+        // Try to find the id in the hashmap, if it's not there catch the exception and return null
+        return try {
+            artists[id]
+        } catch(exception: Exception){
+            logger.info { "Exception $exception caught trying to find using id $id" }
+            null
+        }
     }
     fun logAll() {
         artists.values.forEach { logger.info("\n$it") }

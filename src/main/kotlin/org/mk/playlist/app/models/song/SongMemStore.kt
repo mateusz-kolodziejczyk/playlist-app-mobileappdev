@@ -9,11 +9,12 @@ internal fun getId(): Long {
 }
 class SongMemStore : SongStore {
     // Use a map with K,V ID, Artist to make retrieval easier.
-    val songs : MutableMap<Long,Song> = mutableMapOf()
+    val songs : HashMap<Long,Song> = HashMap()
 
     override fun add(song: Song){
         song.id = getId()
         songs[song.id] = song
+        logAll()
     }
     override fun findAll() : ArrayList<Song>{
         return ArrayList(songs.values)
