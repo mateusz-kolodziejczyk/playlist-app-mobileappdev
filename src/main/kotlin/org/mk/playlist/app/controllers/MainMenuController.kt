@@ -19,8 +19,12 @@ class MainMenuController {
                 //1 -> runPlaylistMenu()
                 2 -> songController.run(artistMemStore, songMemStore)
                 3 -> artistController.run(artistMemStore)
+                -99 -> loadDummyData()
                 -1 -> return
             }
         } while (option != -1)
+    }
+    fun loadDummyData(){
+        artistMemStore.loadDummyData()
     }
 }
