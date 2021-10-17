@@ -12,7 +12,8 @@ internal fun getId(): Long {
 class PlaylistMemStore : PlaylistStore {
     var playlists: HashMap<Long, Playlist> = HashMap()
     override fun add(playlist: Playlist){
-
+        playlist.id = getId()
+        playlists[playlist.id] = playlist
     }
     override fun addToPlaylist(id: Long, song: Song){
 

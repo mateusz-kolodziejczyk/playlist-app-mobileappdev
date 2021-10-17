@@ -1,5 +1,7 @@
 package org.mk.playlist.app.views.console
 
-fun runPlaylistMenu(){
-
+class PlaylistView {
+    fun runPlaylistMenu() : Int{
+        return 0
+    }
 }

@@ -7,14 +7,14 @@ import mu.KotlinLogging
 
 class ArtistController {
     private val logger = KotlinLogging.logger {}
-    var artistView = ArtistView()
+    var view = ArtistView()
     fun run(artists : ArtistStore){
         var option = 0
         do {
-            var option = artistView.runArtistMenu()
+            var option = view.runArtistMenu()
             when (option) {
-                1 -> add(artistView.addArtist(), artists)
-                2 -> artistView.listAll(artists.findAll())
+                1 -> add(view.addArtist(), artists)
+                2 -> view.listAll(artists.findAll())
             }
         } while (option != -1)
     }
