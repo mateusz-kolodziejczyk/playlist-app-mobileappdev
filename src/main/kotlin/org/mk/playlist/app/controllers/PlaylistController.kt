@@ -11,18 +11,21 @@ class PlaylistController {
         do {
             var option = view.runPlaylistMenu()
             when (option) {
-                1 -> createPlaylist()
+                1 -> createPlaylist(playlists)
                 2 -> addToPlaylist()
-                3 -> true
+                3 -> view.listAllPlaylists(playlists.findAll())
             }
         } while (option != -1)
     }
 
-    fun createPlaylist(){
-
+    fun createPlaylist(playlists: PlaylistStore){
+        val playlist = view.createPlaylist()
+        if(playlist != null){
+            playlists.add(playlist)
+        }
     }
 
-    fun addToPlaylist(){
+    fun addToPlaylist() {
 
     }
 }
