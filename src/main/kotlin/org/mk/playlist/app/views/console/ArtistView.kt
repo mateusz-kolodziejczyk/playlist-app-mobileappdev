@@ -7,7 +7,7 @@ class ArtistView() {
         var option: Int = 0
         var input: String?
         // The main menu allows the user to go to one of the submenus
-        println("ARTIST MENU")
+        println("\nARTIST MENU")
         println(" 1. Add Artist")
         println(" 2. List all Artists")
         println("-1. Return to Main Menu")
@@ -22,8 +22,8 @@ class ArtistView() {
     }
 
     fun addArtist() : Artist? {
-        println("Add an Artist")
-        print("\nFirst Name: ")
+        println("\nAdd an Artist")
+        print("First Name: ")
         var firstName = readLine()!!
         print("\nLast Name: ")
         var lastName = readLine()!!
@@ -38,8 +38,7 @@ class ArtistView() {
     }
 
     fun listAll(artists: MutableList<Artist>){
-        println("List of all Artists")
-        println("")
+        println("\nList of all Artists")
         for(artist in artists){
             println(artist)
         }

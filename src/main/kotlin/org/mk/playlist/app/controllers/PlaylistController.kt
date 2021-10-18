@@ -12,8 +12,8 @@ class PlaylistController {
             var option = view.runPlaylistMenu()
             when (option) {
                 1 -> createPlaylist(playlists)
-                2 -> addToPlaylist()
-                3 -> view.listAllPlaylists(playlists.findAll())
+                2 -> view.listAllPlaylists(playlists.findAll())
+                //3 -> addToPlaylist()
             }
         } while (option != -1)
     }

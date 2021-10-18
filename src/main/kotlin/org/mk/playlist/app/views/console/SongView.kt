@@ -26,15 +26,15 @@ class SongView() {
     }
 
     fun addSong(artists: ArtistStore): Song? {
-        println("Add a Song")
+        println("\nAdd a Song")
         // Quit out immediately if there are no valid artists.
         if (artists.isEmpty()) {
-            println("\nThere are no artists in the database. Please add an artist before adding a song.")
+            println("There are no artists in the database. Please add an artist before adding a song.")
             return null
         }
 
         // Ask the user whether they want to see a full list of artists
-        print("\nDo you wish to see a full list of artists? (Y/N): ")
+        print("Do you wish to see a full list of artists? (Y/N): ")
         var option = readLine()!!.uppercase()
         if (option == "Y") {
             artists.findAll().forEach { artist -> println(artist) }
@@ -66,8 +66,7 @@ class SongView() {
     }
 
     fun listAll(songs: MutableList<Song>){
-        println("List of all Songs")
-        println("")
-        songs.forEach{song -> print("\n${song.id}: ${song.title} by ${song.artist} in ${song.year}")}
+        println("\nList of all Songs")
+        songs.forEach{song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")}
     }
 }

@@ -28,5 +28,7 @@ class MainMenuController {
     }
     fun loadDummyData(){
         artistMemStore.loadDummyData()
+        songMemStore.loadDummyData()
+        playlistMemStore.loadDummyData()
     }
 }

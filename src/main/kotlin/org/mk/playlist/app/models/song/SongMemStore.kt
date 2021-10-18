@@ -20,4 +20,8 @@ class SongMemStore : SongStore {
     override fun findAll() : ArrayList<Song>{
         return ArrayList(songs.values)
     }
+    fun loadDummyData(){
+        add(Song(title = "Call me maybe"))
+        add(Song(title = "Bohemian Rhapsody"))
+    }
 }

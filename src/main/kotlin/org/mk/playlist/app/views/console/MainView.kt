@@ -10,7 +10,7 @@ class MainView {
         var option: Int = 0
         var input: String?
         // The main menu allows the user to go to one of the submenus
-        println("MAIN MENU")
+        println("\nMAIN MENU")
         println(" 1. Playlists")
         println(" 2. Songs")
         println(" 3. Artists")

@@ -23,4 +23,9 @@ class PlaylistMemStore : PlaylistStore {
     override fun findAll() : MutableList<Playlist>{
         return ArrayList(playlists.values)
     }
+
+    fun loadDummyData(){
+        add(Playlist(name = "Favorite songs"))
+        add(Playlist(name = "Greatest Rock Songs"))
+    }
 }

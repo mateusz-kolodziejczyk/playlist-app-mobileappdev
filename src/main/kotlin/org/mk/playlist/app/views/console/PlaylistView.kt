@@ -7,10 +7,10 @@ class PlaylistView {
         val input : String?
         var option = 0
         // The main menu allows the user to go to one of the submenus
-        println("PLAYLIST MENU")
+        println("\nPLAYLIST MENU")
         println(" 1. Create Playlist")
-        println(" 2. Add to Playlist")
-        println(" 3. List all Playlists")
+        println(" 2. List all Playlists")
+        //println(" 3. Add to Playlist")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -23,8 +23,8 @@ class PlaylistView {
     }
 
     fun createPlaylist() : Playlist?{
-        println("Create a Playlist")
-        print("\n\nName: ")
+        println("\nCreate a Playlist")
+        print("Name: ")
         val name = readLine()!!
         return if(name.isNotEmpty()){
             println("Playlist with name [$name] added")
@@ -40,6 +40,7 @@ class PlaylistView {
     }
 
     fun listAllPlaylists(playlists: MutableList<Playlist>){
-        playlists.forEach { playlist -> print("\n${playlist.id}: ${playlist.name}") }
+        println("\nList of all Playlists")
+        playlists.forEach { playlist -> println("${playlist.id}: ${playlist.name}") }
     }
 }
