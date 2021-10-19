@@ -3,6 +3,7 @@ package org.mk.playlist.app.views.console
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.song.Song
+import org.mk.playlist.app.utilities.getId
 import java.lang.NumberFormatException
 
 class SongView() {
@@ -39,25 +40,30 @@ class SongView() {
         if (option == "Y") {
             artists.findAll().forEach { artist -> println(artist) }
         }
-        var artistId = -2L
+        var artistId = null
         var artist: Artist? = null
         // Do the loop until a valid artist has been found, or the user decides to cancel.
         while (artist == null || artistId == -1L) {
             print("\nAdd an artist by ID. Input -1 for ID to cancel adding a song.")
             print("\nArtist id: ")
-            try {
-                artistId = readLine()!!.toLong()
-            } catch (exception: NumberFormatException) {
-                println("Not a valid id, please type in a number")
+            val artistId = getId()
+            if (artistId == null) {
+                print("\nInvalid ID")
+                break
+            }
+            if (artistId == -1L) {
+                return null
             }
             // Try to find the artist using the id provided
             // The while loop will stop if an artist was found
             artist = artists.findOne(artistId)
-            if(artist == null){
+            if (artist == null) {
                 print("\n\nNo artist was found with id [$artistId]")
             }
         }
-
+        if (artist == null) {
+            return null
+        }
         print("\nSong Name: ")
         var name = readLine()!!
         print("\nYear of Release: ")
@@ -65,8 +71,8 @@ class SongView() {
         return Song(name, year, artist)
     }
 
-    fun listAll(songs: MutableList<Song>){
+    fun listAll(songs: MutableList<Song>) {
         println("\nList of all Songs")
-        songs.forEach{song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")}
+        songs.forEach { song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}") }
     }
 }
