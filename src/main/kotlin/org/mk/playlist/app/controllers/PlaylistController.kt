@@ -13,19 +13,25 @@ class PlaylistController {
             when (option) {
                 1 -> createPlaylist(playlists)
                 2 -> view.listAllPlaylists(playlists.findAll())
-                //3 -> addToPlaylist()
+                3 -> addToPlaylist(playlists, songs)
             }
         } while (option != -1)
     }
 
-    fun createPlaylist(playlists: PlaylistStore){
+    private fun createPlaylist(playlists: PlaylistStore){
         val playlist = view.createPlaylist()
         if(playlist != null){
             playlists.add(playlist)
         }
     }
 
-    fun addToPlaylist() {
-
+    private fun addToPlaylist(playlists: PlaylistStore, songs: SongStore) {
+        val songPlaylist = view.addToPlaylist(playlists, songs)
+        if(songPlaylist == null){
+            return
+        }
+        else{
+            playlists.addToPlaylist(songPlaylist.playlist.id, songPlaylist.song)
+        }
     }
 }

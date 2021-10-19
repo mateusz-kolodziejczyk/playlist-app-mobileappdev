@@ -4,6 +4,7 @@ import org.mk.playlist.app.models.song.Song
 
 interface PlaylistStore {
     fun add(playlist: Playlist)
-    fun addToPlaylist(id: Long, song: Song)
+    fun addToPlaylist(id: Long, song: Song) : Boolean
     fun findAll() : MutableList<Playlist>
+    fun findOne(id: Long) : Playlist?
 }
