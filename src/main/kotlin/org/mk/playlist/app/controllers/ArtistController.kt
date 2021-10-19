@@ -15,6 +15,7 @@ class ArtistController {
             when (option) {
                 1 -> add(view.addArtist(), artists)
                 2 -> view.listAll(artists.findAll())
+                3 -> search(artists)
             }
         } while (option != -1)
     }
@@ -24,6 +25,12 @@ class ArtistController {
         }
         else{
             logger.info("\nArtist not added")
+        }
+    }
+    private fun search(artists: ArtistStore){
+        val artist = view.findArtist(artists)
+        if(artist != null){
+            view.showArtistDetails(artist)
         }
     }
 }

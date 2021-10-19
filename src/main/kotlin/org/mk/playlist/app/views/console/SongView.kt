@@ -3,6 +3,7 @@ package org.mk.playlist.app.views.console
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.song.Song
+import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
 import java.lang.NumberFormatException
 
@@ -71,8 +72,24 @@ class SongView() {
         return Song(name, year, artist)
     }
 
+    fun showSongDetails(song: Song){
+        println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")
+    }
+
+    fun findSong(songs: SongStore) : Song? {
+        print("\nSong ID: ")
+        val id = getId()
+        if(id == null){
+            return null
+        }
+        else if (id == -1L){
+            return null
+        }
+        return songs.findOne(id)
+    }
+
     fun listAll(songs: MutableList<Song>) {
         println("\nList of all Songs")
-        songs.forEach { song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}") }
+        songs.forEach { song -> showSongDetails(song) }
     }
 }

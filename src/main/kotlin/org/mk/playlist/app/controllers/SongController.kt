@@ -16,6 +16,7 @@ class SongController {
             when (option) {
                 1 -> add(view.addSong(artists), songs)
                 2 -> view.listAll(songs.findAll())
+                3 -> search(songs)
             }
         } while (option != -1)
     }
@@ -25,6 +26,12 @@ class SongController {
         }
         else{
             logger.info("Song not added")
+        }
+    }
+    private fun search(songs: SongStore){
+        val song = view.findSong(songs)
+        if(song != null){
+            view.showSongDetails(song)
         }
     }
 }
