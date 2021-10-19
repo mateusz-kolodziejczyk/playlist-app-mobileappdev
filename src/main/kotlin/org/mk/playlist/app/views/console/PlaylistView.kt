@@ -16,6 +16,7 @@ class PlaylistView {
         println(" 1. Create Playlist")
         println(" 2. List all Playlists")
         println(" 3. Add to Playlist")
+        println(" 4. Find a playlist")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -38,6 +39,12 @@ class PlaylistView {
             println("Playlist not added.")
             null
         }
+    }
+
+    fun showPlaylistDetails(playlist: Playlist){
+        println("${playlist.id}: ${playlist.name}")
+        println("Songs in playlist:")
+        playlist.songs.values.forEach{song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")}
     }
 
     fun addToPlaylist(playlists: PlaylistStore, songs:SongStore) : SongPlaylist?{
@@ -67,11 +74,10 @@ class PlaylistView {
         }
         return SongPlaylist(playlist = playlist, song = song)
     }
-    private fun findPlaylist(playlists: PlaylistStore) : Playlist? {
+    fun findPlaylist(playlists: PlaylistStore) : Playlist? {
         print("\nPlaylist ID: ")
         val id = getId()
         if(id == null){
-            print("\nPlease enter a valid id")
             return null
         }
         else if (id == -1L){
@@ -80,11 +86,10 @@ class PlaylistView {
         return playlists.findOne(id)
     }
 
-    private fun findSong(songs: SongStore) : Song? {
+    fun findSong(songs: SongStore) : Song? {
         print("\nSong ID: ")
         val id = getId()
         if(id == null){
-            print("\nPlease enter a valid id")
             return null
         }
         else if (id == -1L){

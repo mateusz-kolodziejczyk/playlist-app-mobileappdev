@@ -14,7 +14,7 @@ class SongView() {
         println("\nSong Menu")
         println(" 1. Add Song")
         println(" 2. List all Songs")
-        println(" 3. List all Artists")
+        println(" 3. Find a song")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
