@@ -35,6 +35,7 @@ class SongController {
         if(song != null){
             view.showSongDetails(song)
         }
+
     }
     private fun deleteOne(songs: SongStore, playlists: PlaylistStore){
         println("Delete a song")

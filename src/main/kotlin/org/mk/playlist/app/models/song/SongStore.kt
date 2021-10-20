@@ -5,4 +5,6 @@ interface SongStore {
     fun findAll() : MutableList<Song>
     fun findOne(id: Long) : Song?
     fun deleteOne(id: Long) : Boolean
+    fun deleteSongsByArtist(id: Long)
+    fun filter(predicate: (Song) -> Boolean) : List<Song>
 }

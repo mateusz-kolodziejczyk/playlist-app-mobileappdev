@@ -15,6 +15,7 @@ class ArtistView() {
         println(" 1. Add Artist")
         println(" 2. List all Artists")
         println(" 3. Find an Artist")
+        println(" 4. Remove an Artist")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")

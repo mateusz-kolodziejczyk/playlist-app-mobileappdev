@@ -35,8 +35,14 @@ class ArtistMemStore : ArtistStore {
     }
 
     override fun deleteOne(id: Long) : Boolean{
-        artists[id]
-        return false
+        return if(artists.remove(id) == null){
+            logger.info { "Could not remove artist with id [$id]" }
+            false
+        }
+        else{
+            logger.info { "Successfully removed artist with id [$id]" }
+            true
+        }
     }
 
     fun loadDummyData(){

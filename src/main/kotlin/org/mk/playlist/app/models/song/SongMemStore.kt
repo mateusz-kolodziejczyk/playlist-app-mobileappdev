@@ -1,5 +1,6 @@
 package org.mk.playlist.app.models.song
 import mu.KotlinLogging
+import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.utilities.logAll
 
 private val logger = KotlinLogging.logger {}
@@ -34,8 +35,21 @@ class SongMemStore : SongStore {
             true
         }
     }
+
+    override fun deleteSongsByArtist(id: Long) {
+        for(song in songs.values){
+            if(song.artist.id == id){
+                songs.remove(song.id)
+            }
+        }
+    }
+
+    override fun filter(predicate: (Song) -> Boolean): List<Song> {
+        return songs.values.filter(predicate)
+    }
     fun loadDummyData(){
-        add(Song(title = "Call me maybe"))
+        add(Song(title = "Call me maybe", artist = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
+        add(Song(title = "Run away with me", artist = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
         add(Song(title = "Bohemian Rhapsody"))
     }
 }

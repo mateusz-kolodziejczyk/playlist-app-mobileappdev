@@ -20,7 +20,7 @@ class MainMenuController {
             when(option){
                 1 -> playlistController.run(songMemStore, playlistMemStore)
                 2 -> songController.run(artistMemStore, songMemStore, playlistMemStore)
-                3 -> artistController.run(artistMemStore)
+                3 -> artistController.run(artistMemStore, songMemStore, playlistMemStore)
                 -99 -> loadDummyData()
                 -1 -> return
             }
