@@ -41,11 +41,15 @@ class PlaylistView {
         }
     }
 
-    fun showPlaylistDetails(playlist: Playlist){
+    fun showPlaylistDetails(playlist: Playlist, songs: Map<Long, Song>){
         println("${playlist.id}: ${playlist.name}")
         println("Songs in playlist:")
-        playlist.songs.forEach{songId -> println(songId)}
-        TODO("Add a way to get song details from just song id")
+        for(songId in playlist.songs){
+            val song = songs[songId]
+            if(song != null){
+                println("$songId: ${song.title}, in ${song.year}")
+            }
+        }
     }
 
     fun addToPlaylist(playlists: PlaylistStore, songs:SongStore) : SongPlaylist?{

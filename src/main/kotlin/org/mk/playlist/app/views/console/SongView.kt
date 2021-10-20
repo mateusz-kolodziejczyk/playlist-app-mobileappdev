@@ -76,9 +76,8 @@ class SongView {
         }
     }
 
-    fun showSongDetails(song: Song){
-        println("${song.id}: ${song.title} by ${song.artistId} in ${song.year}")
-        TODO("Add a way to see artist details just from the ID")
+    fun showSongDetails(song: Song, artist: Artist){
+        println("${song.id}: ${song.title} by $artist in ${song.year}")
     }
 
     fun findSong(songs: SongStore) : Song? {
@@ -93,8 +92,16 @@ class SongView {
         return songs.findOne(id)
     }
 
-    fun listAll(songs: MutableList<Song>) {
+    fun listAll(songs: List<Song>, artists: Map<Long, Artist>) {
         println("\nList of all Songs")
-        songs.forEach { song -> showSongDetails(song) }
+        for(song in songs){
+            val artist = artists[song.id]
+            if(artist != null){
+                showSongDetails(song, artist)
+            }
+            else{
+                showSongDetails(song, Artist())
+            }
+        }
     }
 }

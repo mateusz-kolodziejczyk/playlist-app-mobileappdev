@@ -1,9 +1,9 @@
 package org.mk.playlist.app.models.artist
 
 data class Artist (
-    var id: Long = 0,
-    var firstName: String = "",
-    var lastName: String = ""
+    var id: Long = -1,
+    var firstName: String = "Unknown",
+    var lastName: String = "Artist"
     ){
     // Doing a companion object for data validation
     companion object{

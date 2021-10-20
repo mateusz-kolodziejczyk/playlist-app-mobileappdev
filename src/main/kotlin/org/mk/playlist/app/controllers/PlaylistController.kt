@@ -14,7 +14,7 @@ class PlaylistController {
                 1 -> create(playlists)
                 2 -> view.listAllPlaylists(playlists.findAll())
                 3 -> add(playlists, songs)
-                4 -> search(playlists)
+                4 -> search(playlists, songs)
                 5 -> deleteOne(playlists)
             }
         } while (option != -1)
@@ -37,10 +37,11 @@ class PlaylistController {
         }
     }
 
-    private fun search(playlists: PlaylistStore){
+    private fun search(playlists: PlaylistStore, songs: SongStore){
         val playlist = view.findPlaylist(playlists)
         if(playlist != null){
-            view.showPlaylistDetails(playlist)
+            // Create a map out of the songs list
+            view.showPlaylistDetails(playlist, songs.findAll().associateBy { it.id })
         }
     }
 
