@@ -76,6 +76,18 @@ class PlaylistJSONStore : PlaylistStore {
         serialize()
     }
 
+    override fun deleteSongFromOne(id: Long, songID: Long) {
+        val playlist = playlists[id]
+        if(playlist != null){
+            if(playlist.songs.remove(songID)){
+                logger.info { "Successfully deleted song with id [$songID] from playlist [$id]" }
+            }
+            else{
+                logger.info { "Could not find song with id [$songID] in playlist [$id]"}
+            }
+        }
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(playlists, listType)
         write(JSON_FILE, jsonString)

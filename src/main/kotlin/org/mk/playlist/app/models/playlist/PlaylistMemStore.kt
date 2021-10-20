@@ -63,6 +63,18 @@ class PlaylistMemStore : PlaylistStore {
         }
     }
 
+    override fun deleteSongFromOne(id: Long, songID: Long) {
+        val playlist = playlists[id]
+        if(playlist != null){
+            if(playlist.songs.remove(songID)){
+                logger.info { "Successfully deleted song with id [$songID] from playlist [$id]" }
+            }
+            else{
+                logger.info { "Could not find song with id [$songID] in playlist [$id]"}
+            }
+        }
+    }
+
     fun loadDummyData() {
         add(Playlist(name = "Favorite songs"))
         add(Playlist(name = "Greatest Rock Songs"))

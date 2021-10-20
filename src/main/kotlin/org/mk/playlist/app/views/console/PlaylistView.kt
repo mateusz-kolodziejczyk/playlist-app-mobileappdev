@@ -17,6 +17,7 @@ class PlaylistView {
         println(" 3. Add to Playlist")
         println(" 4. Show Playlist Details")
         println(" 5. Delete a Playlist")
+        println(" 6. Delete a song from a Playlist")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -60,8 +61,7 @@ class PlaylistView {
         var song : Song? = null
         var playlist : Playlist? = null
         while(song == null){
-            println("Type in -1 at any point to stop adding to a playlist")
-            println("Choose a playlist to add to")
+            println("\nChoose a playlist to add to")
             playlist = findPlaylist(playlists)
             if(playlist == null){
                 println("Playlist not found")

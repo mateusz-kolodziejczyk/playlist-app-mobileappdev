@@ -1,5 +1,6 @@
 package org.mk.playlist.app.controllers
 
+import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.views.console.PlaylistView
@@ -45,15 +46,30 @@ class PlaylistController {
     }
 
     private fun search() {
+        view.listAllPlaylists()
         val playlist = view.findPlaylist(playlists)
         if (playlist != null) {
             // Create a map out of the songs list
-            view.showPlaylistDetails(playlist, songs.findAll().associateBy { it.id })
+            showDetails(playlist)
         }
     }
 
     private fun deleteSongFromPlaylist() {
+        println("Delete a song from a Playlist")
+        view.listAllPlaylists(playlists.findAll())
+        val playlist = view.findPlaylist(playlists)
+        if(playlist != null){
+            showDetails(playlist)
+            println("\nChose a song to delete")
+            val song = view.findSong(songs)
+            if(song != null){
+                playlists.deleteSongFromOne(playlist.id, song.id)
+            }
+        }
+    }
 
+    private fun showDetails(playlist: Playlist){
+        view.showPlaylistDetails(playlist, songs.findAll().associateBy { it.id })
     }
 
     private fun deleteOne() {
