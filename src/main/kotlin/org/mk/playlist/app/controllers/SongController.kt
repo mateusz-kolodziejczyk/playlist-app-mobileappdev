@@ -11,15 +11,24 @@ import org.mk.playlist.app.views.console.SongView
 class SongController {
     private val logger = KotlinLogging.logger {}
     private var view = SongView()
+
+    private lateinit var artists: ArtistStore
+    private lateinit var songs: SongStore
+    private lateinit var playlists: PlaylistStore
+
     fun run(artists : ArtistStore, songs: SongStore, playlists: PlaylistStore){
+        this.artists = artists
+        this.songs = songs
+        this.playlists = playlists
+
         var option : Int
         do {
             option = view.runSongMenu()
             when (option) {
                 1 -> add(view.addSong(artists), songs)
-                2 -> listAll(songs, artists)
-                3 -> search(songs, artists)
-                4 -> deleteOne(songs, playlists, artists)
+                2 -> listAll()
+                3 -> search()
+                4 -> deleteOne()
             }
         } while (option != -1)
     }
@@ -31,7 +40,7 @@ class SongController {
             logger.info("Song not added")
         }
     }
-    private fun search(songs: SongStore, artists: ArtistStore){
+    private fun search() {
         val song = view.findSong(songs)
         if(song != null){
             val artist = artists.findOne(song.artistId)
@@ -44,10 +53,10 @@ class SongController {
         }
 
     }
-    private fun listAll(songs: SongStore, artists: ArtistStore){
+    private fun listAll() {
         view.listAll(songs.findAll(), artists.findAll().associateBy { it.id })
     }
-    private fun deleteOne(songs: SongStore, playlists: PlaylistStore, artists: ArtistStore){
+    private fun deleteOne() {
         println("Delete a song")
         view.listAll(songs.findAll(), artists.findAll().associateBy { it.id })
         val song = view.findSong(songs)
