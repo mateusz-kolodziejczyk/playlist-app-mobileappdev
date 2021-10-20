@@ -46,6 +46,7 @@ class PlaylistController {
 
     private fun deleteOne(playlists: PlaylistStore){
         println("Delete a single Playlist")
+        view.listAllPlaylists(playlists.findAll())
         val playlist = view.findPlaylist(playlists)
         if(playlist != null){
             val wasDeleted = playlists.deleteOne(playlist.id)

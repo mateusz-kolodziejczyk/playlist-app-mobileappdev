@@ -16,7 +16,7 @@ class PlaylistView {
         println(" 1. Create Playlist")
         println(" 2. List all Playlists")
         println(" 3. Add to Playlist")
-        println(" 4. Find a Playlist")
+        println(" 4. Show Playlist Details")
         println(" 5. Delete a Playlist")
         println("-1. Return to Main Menu")
         println()

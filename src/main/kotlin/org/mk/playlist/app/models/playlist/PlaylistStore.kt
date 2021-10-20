@@ -8,4 +8,5 @@ interface PlaylistStore {
     fun findAll() : MutableList<Playlist>
     fun findOne(id: Long) : Playlist?
     fun deleteOne(id: Long) : Boolean
+    fun deleteSongFromAll(id: Long)
 }

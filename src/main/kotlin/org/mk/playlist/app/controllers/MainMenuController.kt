@@ -19,7 +19,7 @@ class MainMenuController {
             option = view.menu()
             when(option){
                 1 -> playlistController.run(songMemStore, playlistMemStore)
-                2 -> songController.run(artistMemStore, songMemStore)
+                2 -> songController.run(artistMemStore, songMemStore, playlistMemStore)
                 3 -> artistController.run(artistMemStore)
                 -99 -> loadDummyData()
                 -1 -> return

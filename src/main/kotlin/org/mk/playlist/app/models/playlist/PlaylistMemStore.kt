@@ -56,6 +56,14 @@ class PlaylistMemStore : PlaylistStore {
         }
     }
 
+    // This function works alongside the remove song function in SongStore to remove any instance of a song
+    // that was removed
+    override fun deleteSongFromAll(id: Long) {
+        for(playlist in playlists.values){
+            playlist.songs.remove(id)
+        }
+    }
+
     fun loadDummyData() {
         add(Playlist(name = "Favorite songs"))
         add(Playlist(name = "Greatest Rock Songs"))

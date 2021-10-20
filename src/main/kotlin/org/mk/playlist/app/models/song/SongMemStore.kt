@@ -23,6 +23,17 @@ class SongMemStore : SongStore {
     override fun findOne(id: Long) : Song?{
         return songs[id]
     }
+
+    override fun deleteOne(id: Long): Boolean {
+        return if(songs.remove(id) == null){
+            logger.info { "Could not remove song with id [$id]" }
+            false
+        }
+        else{
+            logger.info { "Successfully removed song with id [$id]" }
+            true
+        }
+    }
     fun loadDummyData(){
         add(Song(title = "Call me maybe"))
         add(Song(title = "Bohemian Rhapsody"))
