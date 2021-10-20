@@ -5,16 +5,13 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import mu.KotlinLogging
 import org.mk.playlist.app.models.playlist.Playlist
-import org.mk.playlist.app.utilities.exists
-import org.mk.playlist.app.utilities.logAll
-import org.mk.playlist.app.utilities.read
-import org.mk.playlist.app.utilities.write
+import org.mk.playlist.app.utilities.*
 
 private val logger = KotlinLogging.logger {}
 
-const val JSON_FILE = "songs.json"
+const val JSON_FILE = "json/songs.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting().create()
-val listType = object : TypeToken<java.util.HashMap<Long, Playlist>>() {}.type
+val listType = object : TypeToken<java.util.HashMap<Long, Song>>() {}.type
 
 class SongJSONStore : SongStore {
     // Use a map with K,V ID, Artist to make retrieval easier.
@@ -27,7 +24,7 @@ class SongJSONStore : SongStore {
     }
 
     override fun add(song: Song){
-        song.id = getId()
+        song.id = generateRandomId()
         songs[song.id] = song
         logAll(songs.values, logger)
         serialize()

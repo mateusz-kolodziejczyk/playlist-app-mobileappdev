@@ -4,14 +4,11 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import mu.KotlinLogging
-import org.mk.playlist.app.utilities.exists
-import org.mk.playlist.app.utilities.logAll
-import org.mk.playlist.app.utilities.read
-import org.mk.playlist.app.utilities.write
+import org.mk.playlist.app.utilities.*
 
 private val logger = KotlinLogging.logger {}
 
-const val JSON_FILE = "artists.json"
+const val JSON_FILE = "json/artists.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.HashMap<Long, Artist>>() {}.type
 
@@ -26,7 +23,7 @@ class ArtistJSONStore : ArtistStore {
     }
 
     override fun add(artist: Artist){
-        artist.id = getId()
+        artist.id = generateRandomId()
         artists[artist.id] = artist
         logAll(artists.values, logger)
         serialize()

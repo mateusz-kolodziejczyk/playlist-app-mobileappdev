@@ -77,7 +77,7 @@ class SongView {
     }
 
     fun showSongDetails(song: Song, artist: Artist){
-        println("${song.id}: ${song.title} by $artist in ${song.year}")
+        println("${song.id}: ${song.title} by [$artist] in ${song.year}")
     }
 
     fun findSong(songs: SongStore) : Song? {
@@ -95,7 +95,7 @@ class SongView {
     fun listAll(songs: List<Song>, artists: Map<Long, Artist>) {
         println("\nList of all Songs")
         for(song in songs){
-            val artist = artists[song.id]
+            val artist = artists[song.artistId]
             if(artist != null){
                 showSongDetails(song, artist)
             }

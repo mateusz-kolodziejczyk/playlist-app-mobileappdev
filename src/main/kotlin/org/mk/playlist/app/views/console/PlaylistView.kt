@@ -47,7 +47,7 @@ class PlaylistView {
         for(songId in playlist.songs){
             val song = songs[songId]
             if(song != null){
-                println("$songId: ${song.title}, in ${song.year}")
+                println("$songId: ${song.title}, ${song.year}")
             }
         }
     }

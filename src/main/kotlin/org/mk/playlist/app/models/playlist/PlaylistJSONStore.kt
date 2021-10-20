@@ -1,20 +1,16 @@
 package org.mk.playlist.app.models.playlist
 
 import org.mk.playlist.app.models.song.Song
-import org.mk.playlist.app.utilities.logAll
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import mu.KotlinLogging
 import org.mk.playlist.app.models.artist.Artist
-import org.mk.playlist.app.utilities.exists
-import org.mk.playlist.app.utilities.logAll
-import org.mk.playlist.app.utilities.read
-import org.mk.playlist.app.utilities.write
+import org.mk.playlist.app.utilities.*
 
 private val logger = KotlinLogging.logger {}
 
-const val JSON_FILE = "playlists.json"
+const val JSON_FILE = "json/playlists.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.HashMap<Long, Playlist>>() {}.type
 
@@ -28,7 +24,7 @@ class PlaylistJSONStore : PlaylistStore {
     }
 
     override fun add(playlist: Playlist) {
-        playlist.id = getId()
+        playlist.id = generateRandomId()
         playlists[playlist.id] = playlist
         logAll(playlists.values, logger)
         serialize()
@@ -40,6 +36,7 @@ class PlaylistJSONStore : PlaylistStore {
             // If playlist does not already contain the song, add it.
             if (playlist.songs.add(song.id)) {
                 logger.info { "$song added to playlist [$id]" }
+                serialize()
                 true
             } else {
                 logger.info { "Trying to add duplicate song to playlist." }
