@@ -6,10 +6,10 @@ import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
 
-class SongView() {
+class SongView {
     fun runSongMenu(): Int {
         var option: Int = 0
-        var input: String?
+        val input: String?
         // The main menu allows the user to go to one of the submenus
         println("\nSong Menu")
         println(" 1. Add Song")
@@ -20,7 +20,7 @@ class SongView() {
         println()
         print("Enter Option : ")
         input = readLine()!!
-        option = if (input.toIntOrNull() != null && !input.isEmpty())
+        option = if (input.toIntOrNull() != null && input.isNotEmpty())
             input.toInt()
         else
             -9
@@ -37,17 +37,17 @@ class SongView() {
 
         // Ask the user whether they want to see a full list of artists
         print("Do you wish to see a full list of artists? (Y/N): ")
-        var option = readLine()!!.uppercase()
+        val option = readLine()!!.uppercase()
         if (option == "Y") {
             artists.findAll().forEach { artist -> println(artist) }
         }
-        var artistId = null
+        var artistId : Long? = null
         var artist: Artist? = null
         // Do the loop until a valid artist has been found, or the user decides to cancel.
         while (artist == null || artistId == -1L) {
             print("\nAdd an artist by ID. Input -1 for ID to cancel adding a song.")
             print("\nArtist id: ")
-            val artistId = getId()
+            artistId = getId()
             if (artistId == null) {
                 print("\nInvalid ID")
                 break
@@ -66,14 +66,19 @@ class SongView() {
             return null
         }
         print("\nSong Name: ")
-        var name = readLine()!!
+        val name = readLine()!!
         print("\nYear of Release: ")
-        var year = readLine()!!
-        return Song(name, year, artist)
+        val year = readLine()!!
+        return if(artistId == null){
+            null
+        } else{
+            Song(name, year, artistId)
+        }
     }
 
     fun showSongDetails(song: Song){
         println("${song.id}: ${song.title} by ${song.artistId} in ${song.year}")
+        TODO("Add a way to see artist details just from the ID")
     }
 
     fun findSong(songs: SongStore) : Song? {

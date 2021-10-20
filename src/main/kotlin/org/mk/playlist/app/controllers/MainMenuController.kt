@@ -6,13 +6,13 @@ import org.mk.playlist.app.models.song.SongMemStore
 import org.mk.playlist.app.views.console.MainView
 
 class MainMenuController {
-    var view = MainView()
-    var artistMemStore = ArtistMemStore()
-    var artistController = ArtistController()
-    var songMemStore = SongMemStore()
-    var songController = SongController()
-    var playlistMemStore = PlaylistMemStore()
-    var playlistController = PlaylistController()
+    private var view = MainView()
+    private var artistMemStore = ArtistMemStore()
+    private var artistController = ArtistController()
+    private var songMemStore = SongMemStore()
+    private var songController = SongController()
+    private var playlistMemStore = PlaylistMemStore()
+    private var playlistController = PlaylistController()
     fun run(){
         var option = 0
         do{
@@ -26,7 +26,7 @@ class MainMenuController {
             }
         } while (option != -1)
     }
-    fun loadDummyData(){
+    private fun loadDummyData(){
         artistMemStore.loadDummyData()
         songMemStore.loadDummyData()
         playlistMemStore.loadDummyData()

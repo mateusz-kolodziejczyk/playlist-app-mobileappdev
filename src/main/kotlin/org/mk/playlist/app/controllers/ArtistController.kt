@@ -9,11 +9,11 @@ import org.mk.playlist.app.models.song.SongStore
 
 class ArtistController {
     private val logger = KotlinLogging.logger {}
-    var view = ArtistView()
+    private var view = ArtistView()
     fun run(artists : ArtistStore, songs:SongStore, playlists: PlaylistStore){
         var option = 0
         do {
-            var option = view.runArtistMenu()
+            option = view.runArtistMenu()
             when (option) {
                 1 -> add(view.addArtist(), artists)
                 2 -> view.listAll(artists.findAll())
@@ -42,7 +42,7 @@ class ArtistController {
         if(artist != null){
             // Delete all playlists containing songs by this artist,
             // then delete all songs by this artist before deleting it
-            val songsToDelete = songs.filter { it.artistId.id == artist.id }
+            val songsToDelete = songs.filter { it.artistId == artist.id }
             for(song in songsToDelete){
                 // Delete from playlists then delete the song
                 playlists.deleteSongFromAll(song.id)

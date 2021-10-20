@@ -9,7 +9,7 @@ data class Artist (
     companion object{
         operator fun invoke(firstName: String, lastName: String) : Artist?{
             // If either name field is blank, return a null artist
-            return if(firstName.isNullOrEmpty() || lastName.isNullOrEmpty()){
+            return if(firstName.isEmpty() || lastName.isEmpty()){
                 null
             }
             else{

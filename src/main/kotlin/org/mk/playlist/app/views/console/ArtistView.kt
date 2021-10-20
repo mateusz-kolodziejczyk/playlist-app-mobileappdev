@@ -2,14 +2,12 @@ package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.artist.ArtistStore
-import org.mk.playlist.app.models.song.Song
-import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
 
-class ArtistView() {
+class ArtistView {
     fun runArtistMenu(): Int {
         var option: Int = 0
-        var input: String?
+        val input: String?
         // The main menu allows the user to go to one of the submenus
         println("\nARTIST MENU")
         println(" 1. Add Artist")
@@ -20,7 +18,7 @@ class ArtistView() {
         println()
         print("Enter Option : ")
         input = readLine()!!
-        option = if (input.toIntOrNull() != null && !input.isEmpty())
+        option = if (input.toIntOrNull() != null && input.isNotEmpty())
             input.toInt()
         else
             -9
@@ -30,11 +28,11 @@ class ArtistView() {
     fun addArtist() : Artist? {
         println("\nAdd an Artist")
         print("First Name: ")
-        var firstName = readLine()!!
+        val firstName = readLine()!!
         print("\nLast Name: ")
-        var lastName = readLine()!!
+        val lastName = readLine()!!
         // Using the data validation, the artist will be null if either name field is empty.
-        var newArtist = Artist(firstName, lastName)
+        val newArtist = Artist(firstName, lastName)
         if (newArtist != null) {
             println("Artist added [$firstName $lastName]")
         } else {

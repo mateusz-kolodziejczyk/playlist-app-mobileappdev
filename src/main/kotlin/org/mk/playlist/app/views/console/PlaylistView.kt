@@ -1,7 +1,6 @@
 package org.mk.playlist.app.views.console
 
 import org.mk.playlist.app.models.playlist.Playlist
-import org.mk.playlist.app.models.playlist.PlaylistMemStore
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
@@ -45,7 +44,8 @@ class PlaylistView {
     fun showPlaylistDetails(playlist: Playlist){
         println("${playlist.id}: ${playlist.name}")
         println("Songs in playlist:")
-        playlist.songs.values.forEach{song -> println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")}
+        playlist.songs.forEach{songId -> println(songId)}
+        TODO("Add a way to get song details from just song id")
     }
 
     fun addToPlaylist(playlists: PlaylistStore, songs:SongStore) : SongPlaylist?{
@@ -98,6 +98,7 @@ class PlaylistView {
         }
         return songs.findOne(id)
     }
+
     fun listAllPlaylists(playlists: List<Playlist>){
         println("\nList of all Playlists")
         playlists.forEach { playlist -> println("${playlist.id}: ${playlist.name}") }

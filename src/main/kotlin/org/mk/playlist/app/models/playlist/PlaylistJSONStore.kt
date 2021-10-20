@@ -36,12 +36,10 @@ class PlaylistJSONStore : PlaylistStore {
 
     override fun addToPlaylist(id: Long, song: Song): Boolean {
         val playlist = playlists[id]
-        if (playlist != null) {
+        return if (playlist != null) {
             // If playlist does not already contain the song, add it.
-            return if (!playlist.songs.containsKey(song.id)) {
-                playlist.songs[song.id] = song
+            if (playlist.songs.add(song.id)) {
                 logger.info { "$song added to playlist [$id]" }
-                serialize()
                 true
             } else {
                 logger.info { "Trying to add duplicate song to playlist." }
@@ -49,7 +47,7 @@ class PlaylistJSONStore : PlaylistStore {
             }
         } else {
             logger.info { "Playlist does not exist." }
-            return false
+            false
         }
     }
 

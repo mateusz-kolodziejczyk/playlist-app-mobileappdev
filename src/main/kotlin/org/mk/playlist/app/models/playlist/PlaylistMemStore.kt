@@ -22,10 +22,9 @@ class PlaylistMemStore : PlaylistStore {
 
     override fun addToPlaylist(id: Long, song: Song): Boolean {
         val playlist = playlists[id]
-        if (playlist != null) {
+        return if (playlist != null) {
             // If playlist does not already contain the song, add it.
-            return if (!playlist.songs.containsKey(song.id)) {
-                playlist.songs[song.id] = song
+            if (playlist.songs.add(song.id)) {
                 logger.info { "$song added to playlist [$id]" }
                 true
             } else {
@@ -34,7 +33,7 @@ class PlaylistMemStore : PlaylistStore {
             }
         } else {
             logger.info { "Playlist does not exist." }
-            return false
+            false
         }
     }
 

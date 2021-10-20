@@ -1,14 +1,10 @@
 package org.mk.playlist.app.views.console
 
-import org.mk.playlist.app.models.artist.Artist
-import org.mk.playlist.app.models.playlist.Playlist
-import org.mk.playlist.app.models.song.Song
-
 class MainView {
     // Pass array lists used in main so that the menu can modify them
     fun menu() : Int {
         var option: Int = 0
-        var input: String?
+        val input: String?
         // The main menu allows the user to go to one of the submenus
         println("\nMAIN MENU")
         println(" 1. Playlists")

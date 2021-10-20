@@ -5,11 +5,11 @@ import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.views.console.PlaylistView
 
 class PlaylistController {
-    var view = PlaylistView()
+    private var view = PlaylistView()
     fun run(songs: SongStore, playlists: PlaylistStore){
         var option = 0
         do {
-            var option = view.runPlaylistMenu()
+            option = view.runPlaylistMenu()
             when (option) {
                 1 -> create(playlists)
                 2 -> view.listAllPlaylists(playlists.findAll())
@@ -49,7 +49,7 @@ class PlaylistController {
         view.listAllPlaylists(playlists.findAll())
         val playlist = view.findPlaylist(playlists)
         if(playlist != null){
-            val wasDeleted = playlists.deleteOne(playlist.id)
+            playlists.deleteOne(playlist.id)
         }
     }
 }

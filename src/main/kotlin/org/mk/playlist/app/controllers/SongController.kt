@@ -9,11 +9,11 @@ import org.mk.playlist.app.views.console.SongView
 
 class SongController {
     private val logger = KotlinLogging.logger {}
-    var view = SongView()
+    private var view = SongView()
     fun run(artists : ArtistStore, songs: SongStore, playlists: PlaylistStore){
-        var option = 0
+        var option : Int
         do {
-            var option = view.runSongMenu()
+            option = view.runSongMenu()
             when (option) {
                 1 -> add(view.addSong(artists), songs)
                 2 -> view.listAll(songs.findAll())
