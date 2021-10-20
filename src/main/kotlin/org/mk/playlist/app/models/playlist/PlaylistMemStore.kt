@@ -11,39 +11,52 @@ var lastId = 0L
 internal fun getId(): Long {
     return lastId++
 }
+
 class PlaylistMemStore : PlaylistStore {
     var playlists: HashMap<Long, Playlist> = HashMap()
-    override fun add(playlist: Playlist){
+    override fun add(playlist: Playlist) {
         playlist.id = getId()
         playlists[playlist.id] = playlist
         logAll(playlists.values, logger)
     }
-    override fun addToPlaylist(id: Long, song: Song) : Boolean{
+
+    override fun addToPlaylist(id: Long, song: Song): Boolean {
         val playlist = playlists[id]
-        if(playlist != null){
+        if (playlist != null) {
             // If playlist does not already contain the song, add it.
-            return if(!playlist.songs.containsKey(song.id)){
+            return if (!playlist.songs.containsKey(song.id)) {
                 playlist.songs[song.id] = song
                 logger.info { "$song added to playlist [$id]" }
                 true
-            } else{
-                logger.info{ "Trying to add duplicate song to playlist."}
+            } else {
+                logger.info { "Trying to add duplicate song to playlist." }
                 false
             }
-        }
-        else{
-            logger.info{"Playlist does not exist."}
+        } else {
+            logger.info { "Playlist does not exist." }
             return false
         }
     }
-    override fun findAll() : MutableList<Playlist>{
+
+    override fun findAll(): MutableList<Playlist> {
         return ArrayList(playlists.values)
     }
+
     override fun findOne(id: Long): Playlist? {
         return playlists[id]
     }
 
-    fun loadDummyData(){
+    override fun deleteOne(id: Long): Boolean {
+        return if (playlists.remove(id) == null) {
+            logger.info { "Failed to remove playlist with id [$id]" }
+            false
+        } else {
+            logger.info { "Successfully removed playlist with id [$id]" }
+            true
+        }
+    }
+
+    fun loadDummyData() {
         add(Playlist(name = "Favorite songs"))
         add(Playlist(name = "Greatest Rock Songs"))
     }

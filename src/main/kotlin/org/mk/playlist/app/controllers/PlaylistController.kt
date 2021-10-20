@@ -15,6 +15,7 @@ class PlaylistController {
                 2 -> view.listAllPlaylists(playlists.findAll())
                 3 -> add(playlists, songs)
                 4 -> search(playlists)
+                5 -> deleteOne(playlists)
             }
         } while (option != -1)
     }
@@ -40,6 +41,14 @@ class PlaylistController {
         val playlist = view.findPlaylist(playlists)
         if(playlist != null){
             view.showPlaylistDetails(playlist)
+        }
+    }
+
+    private fun deleteOne(playlists: PlaylistStore){
+        println("Delete a single Playlist")
+        val playlist = view.findPlaylist(playlists)
+        if(playlist != null){
+            val wasDeleted = playlists.deleteOne(playlist.id)
         }
     }
 }

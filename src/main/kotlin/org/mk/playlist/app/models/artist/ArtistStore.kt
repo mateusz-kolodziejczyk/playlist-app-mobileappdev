@@ -5,4 +5,5 @@ interface ArtistStore {
     fun findAll() : MutableList<Artist>
     fun isEmpty() : Boolean
     fun findOne(id: Long) : Artist?
+    fun deleteOne(id: Long) : Boolean
 }

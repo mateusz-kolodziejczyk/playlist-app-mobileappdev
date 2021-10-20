@@ -1,5 +1,6 @@
 package org.mk.playlist.app.models.artist
 import mu.KotlinLogging
+import org.mk.playlist.app.utilities.logAll
 
 private val logger = KotlinLogging.logger {}
 var lastId = 0L
@@ -13,6 +14,7 @@ class ArtistMemStore : ArtistStore {
     override fun add(artist: Artist){
         artist.id = getId()
         artists[artist.id] = artist
+        logAll(artists.values, logger)
     }
 
     override fun isEmpty() : Boolean{
@@ -30,6 +32,11 @@ class ArtistMemStore : ArtistStore {
             logger.info { "Exception $exception caught trying to find using id $id" }
             null
         }
+    }
+
+    override fun deleteOne(id: Long) : Boolean{
+        artists[id]
+        return false
     }
 
     fun loadDummyData(){
