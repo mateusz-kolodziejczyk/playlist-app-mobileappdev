@@ -38,7 +38,7 @@ class SongMemStore : SongStore {
 
     override fun deleteSongsByArtist(id: Long) {
         for(song in songs.values){
-            if(song.artist.id == id){
+            if(song.artistId.id == id){
                 songs.remove(song.id)
             }
         }
@@ -48,8 +48,8 @@ class SongMemStore : SongStore {
         return songs.values.filter(predicate)
     }
     fun loadDummyData(){
-        add(Song(title = "Call me maybe", artist = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
-        add(Song(title = "Run away with me", artist = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
+        add(Song(title = "Call me maybe", artistId = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
+        add(Song(title = "Run away with me", artistId = Artist(id = 0L, firstName = "Carly", lastName = "Rae Jepsen")))
         add(Song(title = "Bohemian Rhapsody"))
     }
 }

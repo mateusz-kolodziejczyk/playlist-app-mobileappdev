@@ -53,7 +53,7 @@ class SongJSONStore : SongStore {
 
     override fun deleteSongsByArtist(id: Long) {
         for(song in songs.values){
-            if(song.artist.id == id){
+            if(song.artistId.id == id){
                 songs.remove(song.id)
             }
         }

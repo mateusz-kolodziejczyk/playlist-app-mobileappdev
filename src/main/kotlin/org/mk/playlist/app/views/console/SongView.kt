@@ -5,7 +5,6 @@ import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
-import java.lang.NumberFormatException
 
 class SongView() {
     fun runSongMenu(): Int {
@@ -74,7 +73,7 @@ class SongView() {
     }
 
     fun showSongDetails(song: Song){
-        println("${song.id}: ${song.title} by ${song.artist} in ${song.year}")
+        println("${song.id}: ${song.title} by ${song.artistId} in ${song.year}")
     }
 
     fun findSong(songs: SongStore) : Song? {
