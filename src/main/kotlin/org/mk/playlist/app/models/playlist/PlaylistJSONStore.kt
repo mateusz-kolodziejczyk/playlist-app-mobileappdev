@@ -87,7 +87,13 @@ class PlaylistJSONStore : PlaylistStore {
             }
         }
     }
-
+    override fun update(playlist: Playlist){
+        val foundPlaylist = playlists[playlist.id]
+        if(foundPlaylist != null){
+            foundPlaylist.name = playlist.name
+        }
+        serialize()
+    }
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(playlists, listType)
         write(JSON_FILE, jsonString)

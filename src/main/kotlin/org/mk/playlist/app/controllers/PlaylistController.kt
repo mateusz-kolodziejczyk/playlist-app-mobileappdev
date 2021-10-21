@@ -46,10 +46,9 @@ class PlaylistController {
     }
 
     private fun search() {
-        view.listAllPlaylists()
+        view.listAllPlaylists(playlists.findAll())
         val playlist = view.findPlaylist(playlists)
         if (playlist != null) {
-            // Create a map out of the songs list
             showDetails(playlist)
         }
     }
@@ -69,6 +68,7 @@ class PlaylistController {
     }
 
     private fun showDetails(playlist: Playlist){
+        // Create a map out of the songs list
         view.showPlaylistDetails(playlist, songs.findAll().associateBy { it.id })
     }
 

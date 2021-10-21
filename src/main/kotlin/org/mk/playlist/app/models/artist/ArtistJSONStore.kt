@@ -57,7 +57,14 @@ class ArtistJSONStore : ArtistStore {
             true
         }
     }
-
+    override fun update(artist: Artist){
+        val foundArtist = artists[artist.id]
+        if(foundArtist != null){
+            foundArtist.firstName = artist.firstName
+            foundArtist.lastName = artist.lastName
+        }
+        serialize()
+    }
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(artists, listType)
         write(JSON_FILE, jsonString)

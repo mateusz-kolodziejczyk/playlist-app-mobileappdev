@@ -45,6 +45,13 @@ class ArtistMemStore : ArtistStore {
         }
     }
 
+    override fun update(artist: Artist){
+        val foundArtist = artists[artist.id]
+        if(foundArtist != null){
+            foundArtist.firstName = artist.firstName
+            foundArtist.lastName = artist.lastName
+        }
+    }
     fun loadDummyData(){
         add(Artist(firstName = "Carly", lastName = "Rae Jepsen"))
         add(Artist(firstName = "Taylor", lastName = "Swift"))

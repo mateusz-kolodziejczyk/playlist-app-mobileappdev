@@ -75,6 +75,13 @@ class PlaylistMemStore : PlaylistStore {
         }
     }
 
+    override fun update(playlist: Playlist){
+        val foundPlaylist = playlists[playlist.id]
+        if(foundPlaylist != null){
+            foundPlaylist.name = playlist.name
+        }
+    }
+
     fun loadDummyData() {
         add(Playlist(name = "Favorite songs"))
         add(Playlist(name = "Greatest Rock Songs"))

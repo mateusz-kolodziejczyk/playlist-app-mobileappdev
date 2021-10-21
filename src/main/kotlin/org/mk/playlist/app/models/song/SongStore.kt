@@ -7,4 +7,5 @@ interface SongStore {
     fun deleteOne(id: Long) : Boolean
     fun deleteSongsByArtist(id: Long)
     fun filter(predicate: (Song) -> Boolean) : List<Song>
+    fun update(song: Song)
 }

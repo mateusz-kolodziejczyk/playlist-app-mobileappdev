@@ -60,7 +60,15 @@ class SongJSONStore : SongStore {
     override fun filter(predicate: (Song) -> Boolean): List<Song> {
         return songs.values.filter(predicate)
     }
-
+    override fun update(song: Song){
+        val foundSong = songs[song.id]
+        if(foundSong != null){
+            foundSong.title = song.title
+            foundSong.year = song.year
+            foundSong.artistId = song.artistId
+        }
+        serialize()
+    }
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(songs, listType)
         write(JSON_FILE, jsonString)

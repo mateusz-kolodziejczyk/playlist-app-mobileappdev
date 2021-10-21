@@ -10,4 +10,5 @@ interface PlaylistStore {
     fun deleteOne(id: Long) : Boolean
     fun deleteSongFromAll(id: Long)
     fun deleteSongFromOne(id: Long, songID: Long)
+    fun update(playlist: Playlist)
 }
