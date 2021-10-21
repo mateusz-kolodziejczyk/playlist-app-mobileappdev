@@ -3,7 +3,7 @@ package org.mk.playlist.app.utilities
 import mu.KotlinLogging
 import java.io.*
 
-val logger = KotlinLogging.logger {}
+private val logger = KotlinLogging.logger {}
 
 fun write( fileName: String, data: String) {
 

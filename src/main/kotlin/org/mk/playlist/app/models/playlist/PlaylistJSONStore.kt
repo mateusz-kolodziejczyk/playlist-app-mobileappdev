@@ -48,7 +48,7 @@ class PlaylistJSONStore : PlaylistStore {
         }
     }
 
-    override fun findAll(): MutableList<Playlist> {
+    override fun findAll(): List<Playlist> {
         return ArrayList(playlists.values)
     }
 
@@ -93,6 +93,11 @@ class PlaylistJSONStore : PlaylistStore {
             foundPlaylist.name = playlist.name
         }
         serialize()
+    }
+
+    override fun findAllWithSong(songID: Long): List<Playlist> {
+        // Simple filter to find all playlists containing a particular song
+        return playlists.values.filter { playlist -> playlist.songs.contains(songID) }
     }
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(playlists, listType)

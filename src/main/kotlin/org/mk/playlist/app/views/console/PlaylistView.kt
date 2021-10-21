@@ -5,6 +5,7 @@ import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
+import org.mk.playlist.app.utilities.listAllSongs
 
 class PlaylistView {
     fun runPlaylistMenu() : Int{
@@ -19,6 +20,7 @@ class PlaylistView {
         println(" 5. Delete a Playlist")
         println(" 6. Delete a Song from a Playlist")
         println(" 7. Update Playlist Name")
+        println(" 8. Find all Playlists with a particular Song")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -61,8 +63,7 @@ class PlaylistView {
     fun addToPlaylist(playlists: PlaylistStore, songs:SongStore) : SongPlaylist?{
         println("\nAdd songs to a playlist")
         listAllPlaylists(playlists.findAll())
-        println("\nList of all songs")
-        songs.findAll().forEach { song -> println("${song.id}: ${song.title}") }
+        listAllSongs(songs)
         var song : Song? = null
         var playlist : Playlist? = null
         while(song == null){
@@ -84,10 +85,13 @@ class PlaylistView {
         }
         return SongPlaylist(playlist = playlist, song = song)
     }
+
     fun findPlaylist(playlists: PlaylistStore) : Playlist? {
         print("\nEnter playlist ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find playlist.")
+            println("Playlist ID has to be a number")
             return null
         }
         else if (id == -1L){
@@ -100,6 +104,8 @@ class PlaylistView {
         print("\nEnter song ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find song.")
+            println("Song ID has to be a number")
             return null
         }
         else if (id == -1L){
@@ -107,7 +113,20 @@ class PlaylistView {
         }
         return songs.findOne(id)
     }
-
+    fun findAllWithSong(playlists: PlaylistStore, songs: SongStore){
+        print("\nEnter Song ID: ")
+        val songID = getId()
+        if(songID != null){
+            val song = songs.findOne(songID)
+            if(song != null){
+                println("Playlists with song [${song.id}: ${song.title}(${song.year})]")
+                playlists.findAllWithSong(songID).forEach{ playlist -> println("${playlist.id}: ${playlist.name}") }
+            }
+            else{
+                println("Song does not exist")
+            }
+        }
+    }
     fun listAllPlaylists(playlists: List<Playlist>){
         println("\nList of all Playlists")
         playlists.forEach { playlist -> println("${playlist.id}: ${playlist.name}") }

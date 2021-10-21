@@ -8,7 +8,7 @@ import org.mk.playlist.app.utilities.logAll
 private val logger = KotlinLogging.logger {}
 var lastId = 0L
 
-internal fun getId(): Long {
+private fun getId(): Long {
     return lastId++
 }
 
@@ -37,7 +37,7 @@ class PlaylistMemStore : PlaylistStore {
         }
     }
 
-    override fun findAll(): MutableList<Playlist> {
+    override fun findAll(): List<Playlist> {
         return ArrayList(playlists.values)
     }
 
@@ -80,6 +80,10 @@ class PlaylistMemStore : PlaylistStore {
         if(foundPlaylist != null){
             foundPlaylist.name = playlist.name
         }
+    }
+
+    override fun findAllWithSong(songID: Long): List<Playlist> {
+        return playlists.values.filter { playlist -> playlist.songs.contains(songID) }
     }
 
     fun loadDummyData() {

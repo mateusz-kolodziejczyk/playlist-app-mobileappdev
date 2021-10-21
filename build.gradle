@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'org.mk.playlist'
-version '0.4 ALPHA'
+version '0.6 ALPHA'
 
 repositories {
     mavenCentral()
