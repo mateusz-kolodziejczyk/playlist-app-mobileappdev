@@ -1,6 +1,5 @@
 package org.mk.playlist.app.models.song
 import mu.KotlinLogging
-import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.utilities.logAll
 
 private val logger = KotlinLogging.logger {}
@@ -47,6 +46,16 @@ class SongMemStore : SongStore {
     override fun filter(predicate: (Song) -> Boolean): List<Song> {
         return songs.values.filter(predicate)
     }
+
+    override fun update(song: Song){
+        val foundSong = songs[song.id]
+        if(foundSong != null){
+            foundSong.title = song.title
+            foundSong.year = song.year
+            foundSong.artistId = song.artistId
+        }
+    }
+
     fun loadDummyData(){
         add(Song(title = "Call me maybe", artistId = 0L))
         add(Song(title = "Run away with me", artistId = 0L))

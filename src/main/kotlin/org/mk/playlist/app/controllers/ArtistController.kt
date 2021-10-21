@@ -6,44 +6,57 @@ import org.mk.playlist.app.views.console.ArtistView
 import mu.KotlinLogging
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.SongStore
+import org.mk.playlist.app.utilities.listAllArtists
 
 class ArtistController {
     private val logger = KotlinLogging.logger {}
     private var view = ArtistView()
-    fun run(artists : ArtistStore, songs:SongStore, playlists: PlaylistStore){
-        var option = 0
+
+    private lateinit var artists: ArtistStore
+    private lateinit var songs: SongStore
+    private lateinit var playlists: PlaylistStore
+
+    fun run(artists: ArtistStore, songs: SongStore, playlists: PlaylistStore) {
+        this.artists = artists
+        this.songs = songs
+        this.playlists = playlists
+
+        var option: Int
         do {
             option = view.runArtistMenu()
             when (option) {
-                1 -> add(view.addArtist(), artists)
-                2 -> view.listAll(artists.findAll())
-                3 -> search(artists)
-                4 -> deleteOne(artists, songs, playlists)
+                1 -> add(view.addArtist())
+                2 -> listAllArtists(artists)
+                3 -> search()
+                4 -> deleteOne()
+                5 -> update()
             }
         } while (option != -1)
     }
-    private fun add(artist: Artist?, artistStore: ArtistStore){
-        if(artist != null){
-            artistStore.add(artist)
-        }
-        else{
+
+    private fun add(artist: Artist?) {
+        if (artist != null) {
+            artists.add(artist)
+        } else {
             logger.info("\nArtist not added")
         }
     }
-    private fun search(artists: ArtistStore){
+
+    private fun search() {
         val artist = view.findArtist(artists)
-        if(artist != null){
+        if (artist != null) {
             view.showArtistDetails(artist)
         }
     }
-    private fun deleteOne(artists: ArtistStore, songs: SongStore, playlists: PlaylistStore){
-        view.listAll(artists.findAll())
+
+    private fun deleteOne() {
+        listAllArtists(artists)
         val artist = view.findArtist(artists)
-        if(artist != null){
+        if (artist != null) {
             // Delete all playlists containing songs by this artist,
             // then delete all songs by this artist before deleting it
             val songsToDelete = songs.filter { it.artistId == artist.id }
-            for(song in songsToDelete){
+            for (song in songsToDelete) {
                 // Delete from playlists then delete the song
                 playlists.deleteSongFromAll(song.id)
                 songs.deleteOne(song.id)
@@ -51,6 +64,14 @@ class ArtistController {
             artists.deleteOne(artist.id)
         }
 
+    }
+
+    private fun update() {
+        listAllArtists(artists)
+        val newArtistDetails = view.updateArtistDetails(artists)
+        if(newArtistDetails != null){
+            artists.update(newArtistDetails)
+        }
     }
 
 }

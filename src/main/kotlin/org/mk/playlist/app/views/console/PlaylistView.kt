@@ -17,6 +17,8 @@ class PlaylistView {
         println(" 3. Add to Playlist")
         println(" 4. Show Playlist Details")
         println(" 5. Delete a Playlist")
+        println(" 6. Delete a Song from a Playlist")
+        println(" 7. Update Playlist Name")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -30,8 +32,7 @@ class PlaylistView {
 
     fun createPlaylist() : Playlist?{
         println("\nCreate a Playlist")
-        print("Name: ")
-        val name = readLine()!!
+        val name = readInPlaylistName()
         return if(name.isNotEmpty()){
             println("Playlist with name [$name] added")
             Playlist(name = name)
@@ -41,8 +42,13 @@ class PlaylistView {
         }
     }
 
+    private fun readInPlaylistName() : String{
+        print("\nEnter a name: ")
+        return readLine()!!
+    }
+
     fun showPlaylistDetails(playlist: Playlist, songs: Map<Long, Song>){
-        println("${playlist.id}: ${playlist.name}")
+        println("\nFull details for: [${playlist.id}: ${playlist.name}]")
         println("Songs in playlist:")
         for(songId in playlist.songs){
             val song = songs[songId]
@@ -60,8 +66,7 @@ class PlaylistView {
         var song : Song? = null
         var playlist : Playlist? = null
         while(song == null){
-            println("Type in -1 at any point to stop adding to a playlist")
-            println("Choose a playlist to add to")
+            println("\nChoose a playlist to add to")
             playlist = findPlaylist(playlists)
             if(playlist == null){
                 println("Playlist not found")
@@ -80,7 +85,7 @@ class PlaylistView {
         return SongPlaylist(playlist = playlist, song = song)
     }
     fun findPlaylist(playlists: PlaylistStore) : Playlist? {
-        print("\nPlaylist ID: ")
+        print("\nEnter playlist ID: ")
         val id = getId()
         if(id == null){
             return null
@@ -92,7 +97,7 @@ class PlaylistView {
     }
 
     fun findSong(songs: SongStore) : Song? {
-        print("\nSong ID: ")
+        print("\nEnter song ID: ")
         val id = getId()
         if(id == null){
             return null
@@ -106,6 +111,25 @@ class PlaylistView {
     fun listAllPlaylists(playlists: List<Playlist>){
         println("\nList of all Playlists")
         playlists.forEach { playlist -> println("${playlist.id}: ${playlist.name}") }
+    }
+
+    fun updateName(playlists: PlaylistStore): Playlist?{
+        println("\nUpdate playlist name")
+        val playlist = findPlaylist(playlists)
+        return if(playlist != null){
+            println("Current name: [${playlist.name}]")
+            val newName = readInPlaylistName()
+            if(newName.isNotEmpty()){
+                println("Successfully updated playlist")
+                Playlist(id = playlist.id, name = newName)
+            } else{
+                println("Playlist not updated")
+                null
+            }
+        } else{
+            println("Playlist not found")
+            null
+        }
     }
 }
 

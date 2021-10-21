@@ -14,6 +14,7 @@ class ArtistView {
         println(" 2. List all Artists")
         println(" 3. Find an Artist")
         println(" 4. Remove an Artist")
+        println(" 5. Update Artist Details")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -57,12 +58,29 @@ class ArtistView {
         return artists.findOne(id)
     }
 
-    fun listAll(artists: MutableList<Artist>){
-        println("\nList of all Artists")
-        for(artist in artists){
-            println(artist)
+    fun updateArtistDetails(artists: ArtistStore) : Artist? {
+        println("\nUpdate Artist Details")
+        println("Leave the space blank to not update a field")
+        val artist = findArtist(artists)
+        return if(artist != null){
+            print("\nEnter a new first name for [${artist.firstName}]: ")
+            var newFirstName = readLine()!!
+            if(newFirstName.isEmpty()){
+                newFirstName = artist.firstName
+            }
+            print("\nEnter a new last name for [${artist.lastName}]: ")
+            var newLastName = readLine()!!
+            if(newLastName.isEmpty()){
+                newLastName = artist.firstName
+            }
+            println("New artist details: [First Name: $newFirstName, Last Name: $newLastName]")
+            Artist(id = artist.id, firstName = newFirstName, lastName = newLastName)
+        } else{
+            println("Could not find artist")
+            null
         }
     }
+
 }
 
 
