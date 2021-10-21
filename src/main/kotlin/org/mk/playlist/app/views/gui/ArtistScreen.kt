@@ -21,6 +21,12 @@ class ArtistScreen : View("My View") {
             readonlyColumn("First Name", Artist::firstName)
             readonlyColumn("Last Name", Artist::lastName)
         }
+        button ("Refresh Table")
+        {
+            action {
+                data.setAll(artistController.artists.findAll().asObservable())
+            }
+        }
         button("Quit to Main Menu") {
             useMaxWidth = true
             action {

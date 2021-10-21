@@ -19,6 +19,12 @@ class SongScreen : View("My View") {
             readonlyColumn("Name", Playlist::name)
 
         }
+        button ("Refresh Table")
+        {
+            action {
+                data.setAll(song.playlists.findAll().asObservable())
+            }
+        }
         button("Quit to Main Menu") {
             useMaxWidth = true
             action {
