@@ -84,9 +84,9 @@ class PlaylistController {
 
     private fun updateName() {
         view.listAllPlaylists(playlists.findAll())
-        val updatedPlaylist = view.updateName(playlists)
-        if(updatedPlaylist != null){
-            playlists.update(updatedPlaylist)
+        val newPlaylistDetials = view.updateName(playlists)
+        if(newPlaylistDetials != null){
+            playlists.update(newPlaylistDetials)
         }
     }
 

@@ -67,7 +67,11 @@ class ArtistController {
     }
 
     private fun update() {
-        TODO("Not yet implemented")
+        listAllArtists(artists)
+        val newArtistDetails = view.updateArtistDetails(artists)
+        if(newArtistDetails != null){
+            artists.update(newArtistDetails)
+        }
     }
 
 }

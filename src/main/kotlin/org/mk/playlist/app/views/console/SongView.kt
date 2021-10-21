@@ -126,7 +126,7 @@ class SongView {
             } catch(exception: NumberFormatException) {
                 song.artistId
             }
-            println("New Song details: [Title: ${newTitle}, Year: ${newYear}, Artist: [${artists.findOne(newArtistId)}]]")
+            println("New Song details: [Title: $newTitle, Year: $newYear, Artist: [${artists.findOne(newArtistId)}]]")
             return Song(id = song.id, title = newTitle, year = newYear, artistId = newArtistId)
         }
         else{

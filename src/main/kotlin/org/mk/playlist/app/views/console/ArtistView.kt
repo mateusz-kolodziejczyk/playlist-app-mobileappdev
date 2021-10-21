@@ -58,6 +58,28 @@ class ArtistView {
         return artists.findOne(id)
     }
 
+    fun updateArtistDetails(artists: ArtistStore) : Artist? {
+        println("\nUpdate Artist Details")
+        println("Leave the space blank to not update a field")
+        val artist = findArtist(artists)
+        return if(artist != null){
+            print("\nEnter a new first name for [${artist.firstName}]: ")
+            var newFirstName = readLine()!!
+            if(newFirstName.isEmpty()){
+                newFirstName = artist.firstName
+            }
+            print("\nEnter a new last name for [${artist.lastName}]: ")
+            var newLastName = readLine()!!
+            if(newLastName.isEmpty()){
+                newLastName = artist.firstName
+            }
+            println("New artist details: [First Name: $newFirstName, Last Name: $newLastName]")
+            Artist(id = artist.id, firstName = newFirstName, lastName = newLastName)
+        } else{
+            println("Could not find artist")
+            null
+        }
+    }
 
 }
 

@@ -43,12 +43,12 @@ class PlaylistView {
     }
 
     private fun readInPlaylistName() : String{
-        print("Name: ")
+        print("\nEnter a name: ")
         return readLine()!!
     }
 
     fun showPlaylistDetails(playlist: Playlist, songs: Map<Long, Song>){
-        println("${playlist.id}: ${playlist.name}")
+        println("\nFull details for: [${playlist.id}: ${playlist.name}]")
         println("Songs in playlist:")
         for(songId in playlist.songs){
             val song = songs[songId]
@@ -85,7 +85,7 @@ class PlaylistView {
         return SongPlaylist(playlist = playlist, song = song)
     }
     fun findPlaylist(playlists: PlaylistStore) : Playlist? {
-        print("\nPlaylist ID: ")
+        print("\nEnter playlist ID: ")
         val id = getId()
         if(id == null){
             return null
@@ -97,7 +97,7 @@ class PlaylistView {
     }
 
     fun findSong(songs: SongStore) : Song? {
-        print("\nSong ID: ")
+        print("\nEnter song ID: ")
         val id = getId()
         if(id == null){
             return null
