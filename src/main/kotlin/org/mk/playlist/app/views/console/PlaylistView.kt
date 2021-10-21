@@ -88,6 +88,8 @@ class PlaylistView {
         print("\nEnter playlist ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find playlist.")
+            println("Playlist ID has to be a number")
             return null
         }
         else if (id == -1L){
@@ -100,6 +102,8 @@ class PlaylistView {
         print("\nEnter song ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find song.")
+            println("Song ID has to be a number")
             return null
         }
         else if (id == -1L){

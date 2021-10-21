@@ -50,6 +50,8 @@ class ArtistView {
         print("\nArtist ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find artist.")
+            println("Artist ID has to be a number")
             return null
         }
         else if (id == -1L){

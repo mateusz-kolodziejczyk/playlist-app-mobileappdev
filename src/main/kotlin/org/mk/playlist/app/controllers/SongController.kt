@@ -6,6 +6,7 @@ import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
+import org.mk.playlist.app.utilities.listAllArtists
 import org.mk.playlist.app.views.console.SongView
 
 class SongController {
@@ -30,6 +31,7 @@ class SongController {
                 3 -> search()
                 4 -> deleteOne()
                 5 -> update()
+                6 -> advancedSearch()
            }
         } while (option != -1)
     }
@@ -75,4 +77,30 @@ class SongController {
             songs.update(newSongDetails)
         }
     }
+    // Advanced search includes filter functions
+    private fun advancedSearch(){
+        // Menu is similar to the other menus in the program, but this one only runs once.
+        val option = view.runAdvancedSearchMenu()
+        when(option){
+            1 -> findAllByArtist()
+            2 -> findAllByYear()
+        }
+    }
+    private fun findAllByYear(){
+        val year = view.getYear()
+        val songList = songs.filter { it.year == year  }
+        println("Songs from $year: ")
+        songList.forEach{song -> println("${song.id}: ${song.title} by [${artists.findOne(song.id)}]")}
+    }
+    private fun findAllByArtist(){
+        print("\nEnter Artist ID: ")
+        listAllArtists(artists)
+        val artistId = org.mk.playlist.app.utilities.getId()
+        if(artistId != null){
+            val songList = songs.filter { it.artistId == artistId }
+            println("Songs by [${artists.findOne(artistId)}]: ")
+            songList.forEach{song -> println("${song.id}: ${song.title} by [${artists.findOne(song.id)}]")}
+        }
+    }
+
 }

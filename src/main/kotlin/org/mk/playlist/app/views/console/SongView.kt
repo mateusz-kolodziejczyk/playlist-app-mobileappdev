@@ -18,6 +18,7 @@ class SongView {
         println(" 3. Find a Song")
         println(" 4. Delete a Song")
         println(" 5. Update Song Details")
+        println(" 6. Advanced Search")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -45,10 +46,11 @@ class SongView {
         // Do the loop until a valid artist has been found, or the user decides to cancel.
         while (artist == null || artistId == -1L) {
             print("\nAdd an artist by ID. Input -1 for ID to cancel adding a song.")
-            print("\nArtist id: ")
+            print("\nEnter Artist id: ")
             artistId = getId()
             if (artistId == null) {
-                print("\nInvalid ID")
+                println("Could not find artist.")
+                println("Artist ID has to be a number")
                 break
             }
             if (artistId == -1L) {
@@ -64,9 +66,9 @@ class SongView {
         if (artist == null) {
             return null
         }
-        print("\nSong Name: ")
+        print("\nEnter Song Name: ")
         val name = readLine()!!
-        print("\nYear of Release: ")
+        print("\nEnter Year of Release: ")
         val year = readLine()!!
         return if(artistId == null){
             null
@@ -80,9 +82,11 @@ class SongView {
     }
 
     fun findSong(songs: SongStore) : Song? {
-        print("\nSong ID: ")
+        print("\nEnter Song ID: ")
         val id = getId()
         if(id == null){
+            println("Could not find song.")
+            println("Song ID has to be a number")
             return null
         }
         else if (id == -1L){
@@ -134,5 +138,26 @@ class SongView {
             return null
         }
 
+    }
+
+    fun runAdvancedSearchMenu(): Int {
+        println("Advanced Search Menu")
+        println("1. Find all Songs by an artist")
+        println("2. Find all Songs from a specific year")
+        println("-1. Cancel")
+        println()
+        print("\nEnter Option: ")
+        var input = readLine()!!
+        return if(input.toIntOrNull() != null && input.isNotEmpty()){
+            input.toInt()
+        }
+        else{
+            -9
+        }
+    }
+
+    fun getYear(): String{
+        println("Year: ")
+        return readLine()!!
     }
 }

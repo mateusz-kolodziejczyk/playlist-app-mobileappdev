@@ -5,7 +5,7 @@ import org.mk.playlist.app.utilities.logAll
 private val logger = KotlinLogging.logger {}
 var lastId = 0L
 
-internal fun getId(): Long {
+private fun getId(): Long {
     return lastId++
 }
 class SongMemStore : SongStore {
