@@ -1,11 +1,15 @@
 package org.mk.playlist.app.controllers
 
+import mu.KotlinLogging
 import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.SongStore
+import org.mk.playlist.app.utilities.getId
+import org.mk.playlist.app.utilities.listAllSongs
 import org.mk.playlist.app.views.console.PlaylistView
 
 class PlaylistController {
+    private val logger = KotlinLogging.logger {}
     private var view = PlaylistView()
 
     private lateinit var songs: SongStore
@@ -26,9 +30,11 @@ class PlaylistController {
                 5 -> deleteOne()
                 6 -> deleteSongFromPlaylist()
                 7 -> updateName()
+                8 -> findAllWithSong()
             }
         } while (option != -1)
     }
+
 
     private fun create() {
         val playlist = view.createPlaylist()
@@ -89,5 +95,8 @@ class PlaylistController {
             playlists.update(newPlaylistDetials)
         }
     }
-
+    private fun findAllWithSong() {
+        listAllSongs(songs)
+        view.findAllWithSong(playlists, songs)
+    }
 }

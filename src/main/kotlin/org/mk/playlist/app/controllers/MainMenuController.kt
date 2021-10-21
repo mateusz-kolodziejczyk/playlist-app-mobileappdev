@@ -1,5 +1,6 @@
 package org.mk.playlist.app.controllers
 
+import mu.KotlinLogging
 import org.mk.playlist.app.models.artist.ArtistJSONStore
 import org.mk.playlist.app.models.artist.ArtistMemStore
 import org.mk.playlist.app.models.playlist.PlaylistJSONStore
@@ -10,24 +11,34 @@ import org.mk.playlist.app.views.console.MainView
 
 class MainMenuController {
     private var view = MainView()
+
     // Memory Stores
     private var artistMemStore = ArtistMemStore()
     private var songMemStore = SongMemStore()
     private var playlistMemStore = PlaylistMemStore()
+
     // JSON Stores
     private var artistJSONStore = ArtistJSONStore()
     private var songJSONStore = SongJSONStore()
     private var playlistJSONStore = PlaylistJSONStore()
+
     // Controllers
     private var artistController = ArtistController()
     private var songController = SongController()
     private var playlistController = PlaylistController()
 
-    fun run(){
+    val logger = KotlinLogging.logger {}
+
+    init {
+        logger.info { "Launching Placemark Console App" }
+        println("Placemark Kotlin App Version 3.0")
+    }
+
+    fun run() {
         var option = 0
-        do{
+        do {
             option = view.menu()
-            when(option){
+            when (option) {
                 1 -> playlistController.run(songJSONStore, playlistJSONStore)
                 2 -> songController.run(artistJSONStore, songJSONStore, playlistJSONStore)
                 3 -> artistController.run(artistJSONStore, songJSONStore, playlistJSONStore)
@@ -36,7 +47,8 @@ class MainMenuController {
             }
         } while (option != -1)
     }
-    private fun loadDummyData(){
+
+    private fun loadDummyData() {
         artistMemStore.loadDummyData()
         songMemStore.loadDummyData()
         playlistMemStore.loadDummyData()
