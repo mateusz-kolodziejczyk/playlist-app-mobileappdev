@@ -63,6 +63,7 @@ class ArtistView {
             println(artist)
         }
     }
+
 }
 
 

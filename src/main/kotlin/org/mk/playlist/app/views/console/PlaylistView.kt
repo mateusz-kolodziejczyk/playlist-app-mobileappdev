@@ -18,6 +18,7 @@ class PlaylistView {
         println(" 4. Show Playlist Details")
         println(" 5. Delete a Playlist")
         println(" 6. Delete a song from a Playlist")
+        println(" 7. Update playlist name")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -31,8 +32,7 @@ class PlaylistView {
 
     fun createPlaylist() : Playlist?{
         println("\nCreate a Playlist")
-        print("Name: ")
-        val name = readLine()!!
+        val name = readInPlaylistName()
         return if(name.isNotEmpty()){
             println("Playlist with name [$name] added")
             Playlist(name = name)
@@ -40,6 +40,11 @@ class PlaylistView {
             println("Playlist not added.")
             null
         }
+    }
+
+    private fun readInPlaylistName() : String{
+        print("Name: ")
+        return readLine()!!
     }
 
     fun showPlaylistDetails(playlist: Playlist, songs: Map<Long, Song>){
@@ -106,6 +111,26 @@ class PlaylistView {
     fun listAllPlaylists(playlists: List<Playlist>){
         println("\nList of all Playlists")
         playlists.forEach { playlist -> println("${playlist.id}: ${playlist.name}") }
+    }
+
+    fun updateName(playlists: PlaylistStore): Playlist?{
+        println("\nUpdate playlist name")
+        val playlist = findPlaylist(playlists)
+        if(playlist != null){
+            println("Current name: [${playlist.name}]")
+            val newName = readInPlaylistName()
+            return if(newName.isNotEmpty()){
+                println("Successfully updated playlist")
+                Playlist(id = playlist.id, name = newName)
+            } else{
+                println("Playlist not updated")
+                null
+            }
+        }
+        else{
+            println("Playlist not found")
+            return null
+        }
     }
 }
 

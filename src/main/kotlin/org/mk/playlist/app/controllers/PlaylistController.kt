@@ -25,6 +25,7 @@ class PlaylistController {
                 4 -> search()
                 5 -> deleteOne()
                 6 -> deleteSongFromPlaylist()
+                7 -> updateName()
             }
         } while (option != -1)
     }
@@ -80,4 +81,13 @@ class PlaylistController {
             playlists.deleteOne(playlist.id)
         }
     }
+
+    private fun updateName() {
+        view.listAllPlaylists(playlists.findAll())
+        val updatedPlaylist = view.updateName(playlists)
+        if(updatedPlaylist != null){
+            playlists.update(updatedPlaylist)
+        }
+    }
+
 }

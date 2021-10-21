@@ -29,7 +29,8 @@ class SongController {
                 2 -> listAll()
                 3 -> search()
                 4 -> deleteOne()
-            }
+                5 -> update()
+           }
         } while (option != -1)
     }
     private fun add(song: Song?, songStore: SongStore){
@@ -66,5 +67,8 @@ class SongController {
             // Then delete the song itself
             songs.deleteOne(song.id)
         }
+    }
+    private fun update(){
+
     }
 }
