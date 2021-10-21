@@ -142,9 +142,9 @@ class SongView {
 
     fun runAdvancedSearchMenu(): Int {
         println("Advanced Search Menu")
-        println("1. Find all Songs by an artist")
-        println("2. Find all Songs from a specific year")
-        println("-1. Cancel")
+        println(" 1. Find all Songs by an artist")
+        println(" 2. Find all Songs from a specific year")
+        println(" -1. Cancel")
         println()
         print("\nEnter Option: ")
         var input = readLine()!!
@@ -157,7 +157,7 @@ class SongView {
     }
 
     fun getYear(): String{
-        println("Year: ")
+        print("\nEnter Year: ")
         return readLine()!!
     }
 }
