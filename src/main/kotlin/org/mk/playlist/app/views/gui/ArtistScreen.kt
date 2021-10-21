@@ -20,6 +20,11 @@ class ArtistScreen : View("My View") {
                         replaceWith(AddArtistScreen::class, centerOnScreen = true, sizeToScene = true)
                     }
                 }
+                button ("Delete Selected Artist") {
+                    action {
+                        artistController.deleteOne(artistTable.selectionModel.selectedItem.id)
+                    }
+                }
             }
         }
         setPrefSize(800.0, 400.0)
