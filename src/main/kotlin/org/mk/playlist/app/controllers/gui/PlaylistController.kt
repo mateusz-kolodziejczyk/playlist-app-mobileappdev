@@ -14,4 +14,8 @@ class PlaylistController : Controller() {
     fun add(name: String){
         playlists.add(playlist = Playlist(name = name))
     }
+
+    fun deleteOne(id: Long) {
+        playlists.deleteOne(id)
+    }
 }

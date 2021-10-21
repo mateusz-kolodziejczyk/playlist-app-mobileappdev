@@ -19,23 +19,33 @@ class PlaylistScreen : View("Playlists") {
     private lateinit var playlistTable: TableView<Playlist>
 
     override val root = vbox {
-        gridpane{
-            button ("Add Playlist")
-            {
-                action {
-                   // println(playlistController.playlists.deleteSongFromOne(playlistTable.selectionModel.selectedItem.id))
-                    replaceWith(AddPlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
+        gridpane {
+            row {
+                button("Add Playlist")
+                {
+                    action {
+                        // println(playlistController.playlists.deleteSongFromOne(playlistTable.selectionModel.selectedItem.id))
+                        replaceWith(AddPlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
+                    }
+                }
+                button("Delete Selected Playlist")
+                {
+                    action {
+                        playlistController.deleteOne(playlistTable.selectionModel.selectedItem.id)
+                        refreshPlaylistTable()
+                    }
                 }
             }
+
         }
         setPrefSize(800.0, 400.0)
         playlistTable = tableview(data) {
             column("ID", Playlist::id)
             column("Name", Playlist::name)
-            rowExpander (expandOnDoubleClick = true) {
+            rowExpander(expandOnDoubleClick = true) {
                 // This uses a function to turn the song IDs stored in the playlist into song objects that are then
                 // Displayed in a table.
-                tableview(songIDsToSongs(it.songs.toList(), playlistController.songs).asObservable()){
+                tableview(songIDsToSongs(it.songs.toList(), playlistController.songs).asObservable()) {
                     column("ID", Song::id)
                     column("Title", Song::title)
                     column("Year", Song::year)
@@ -44,17 +54,21 @@ class PlaylistScreen : View("Playlists") {
             }
             println("Table created!")
         }
-        button ("Refresh Table")
+        button("Refresh Table")
         {
             action {
-                data.setAll(playlistController.playlists.findAll().asObservable())
+                refreshPlaylistTable()
             }
         }
         button("Quit to Main Menu") {
             useMaxWidth = true
-            action{
+            action {
                 replaceWith(MainMenuScreen::class, sizeToScene = true, centerOnScreen = true)
             }
         }
+    }
+
+    fun refreshPlaylistTable() {
+        data.setAll(playlistController.playlists.findAll().asObservable())
     }
 }

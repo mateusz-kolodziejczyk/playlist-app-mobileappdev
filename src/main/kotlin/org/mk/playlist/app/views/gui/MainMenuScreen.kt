@@ -3,6 +3,7 @@ package org.mk.playlist.app.views.gui
 import javafx.application.Platform
 import javafx.geometry.Orientation
 import org.mk.playlist.app.controllers.gui.PlaylistController
+import org.mk.playlist.app.models.artist.Artist
 import tornadofx.*
 
 class MainMenuScreen : View("Playlist App") {
@@ -20,7 +21,22 @@ class MainMenuScreen : View("Playlist App") {
                     replaceWith(PlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
                 }
             }
+            button("Songs") {
 
+                isDefaultButton = true
+                useMaxWidth = true
+                action {
+                    replaceWith(SongScreen::class, sizeToScene = true, centerOnScreen = true)
+                }
+            }
+            button("Artists") {
+
+                isDefaultButton = true
+                useMaxWidth = true
+                action {
+                    replaceWith(ArtistScreen::class, sizeToScene = true, centerOnScreen = true)
+                }
+            }
             text("")
             button("Exit") {
 
