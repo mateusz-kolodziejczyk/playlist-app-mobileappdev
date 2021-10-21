@@ -6,6 +6,7 @@ import org.mk.playlist.app.views.console.ArtistView
 import mu.KotlinLogging
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.SongStore
+import org.mk.playlist.app.utilities.listAllArtists
 
 class ArtistController {
     private val logger = KotlinLogging.logger {}
@@ -25,9 +26,10 @@ class ArtistController {
             option = view.runArtistMenu()
             when (option) {
                 1 -> add(view.addArtist())
-                2 -> view.listAll(artists.findAll())
+                2 -> listAllArtists(artists)
                 3 -> search()
                 4 -> deleteOne()
+                5 -> update()
             }
         } while (option != -1)
     }
@@ -48,7 +50,7 @@ class ArtistController {
     }
 
     private fun deleteOne() {
-        view.listAll(artists.findAll())
+        listAllArtists(artists)
         val artist = view.findArtist(artists)
         if (artist != null) {
             // Delete all playlists containing songs by this artist,
@@ -62,6 +64,10 @@ class ArtistController {
             artists.deleteOne(artist.id)
         }
 
+    }
+
+    private fun update() {
+        TODO("Not yet implemented")
     }
 
 }

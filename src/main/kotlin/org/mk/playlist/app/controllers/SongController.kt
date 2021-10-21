@@ -69,6 +69,10 @@ class SongController {
         }
     }
     private fun update(){
-
+        listAll()
+        val newSongDetails = view.updateSongDetails(songs, artists)
+        if(newSongDetails != null){
+            songs.update(newSongDetails)
+        }
     }
 }

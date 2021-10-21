@@ -14,6 +14,7 @@ class ArtistView {
         println(" 2. List all Artists")
         println(" 3. Find an Artist")
         println(" 4. Remove an Artist")
+        println(" 5. Update Artist Details")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -57,12 +58,6 @@ class ArtistView {
         return artists.findOne(id)
     }
 
-    fun listAll(artists: MutableList<Artist>){
-        println("\nList of all Artists")
-        for(artist in artists){
-            println(artist)
-        }
-    }
 
 }
 

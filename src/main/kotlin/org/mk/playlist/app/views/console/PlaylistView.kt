@@ -17,8 +17,8 @@ class PlaylistView {
         println(" 3. Add to Playlist")
         println(" 4. Show Playlist Details")
         println(" 5. Delete a Playlist")
-        println(" 6. Delete a song from a Playlist")
-        println(" 7. Update playlist name")
+        println(" 6. Delete a Song from a Playlist")
+        println(" 7. Update Playlist Name")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -116,20 +116,19 @@ class PlaylistView {
     fun updateName(playlists: PlaylistStore): Playlist?{
         println("\nUpdate playlist name")
         val playlist = findPlaylist(playlists)
-        if(playlist != null){
+        return if(playlist != null){
             println("Current name: [${playlist.name}]")
             val newName = readInPlaylistName()
-            return if(newName.isNotEmpty()){
+            if(newName.isNotEmpty()){
                 println("Successfully updated playlist")
                 Playlist(id = playlist.id, name = newName)
             } else{
                 println("Playlist not updated")
                 null
             }
-        }
-        else{
+        } else{
             println("Playlist not found")
-            return null
+            null
         }
     }
 }

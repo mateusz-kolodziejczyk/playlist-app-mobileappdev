@@ -5,6 +5,7 @@ import org.mk.playlist.app.models.artist.ArtistStore
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.models.song.SongStore
 import org.mk.playlist.app.utilities.getId
+import org.mk.playlist.app.utilities.listAllArtists
 
 class SongView {
     fun runSongMenu(): Int {
@@ -14,8 +15,9 @@ class SongView {
         println("\nSong Menu")
         println(" 1. Add Song")
         println(" 2. List all Songs")
-        println(" 3. Find a song")
-        println(" 4. Delete a song")
+        println(" 3. Find a Song")
+        println(" 4. Delete a Song")
+        println(" 5. Update Song Details")
         println("-1. Return to Main Menu")
         println()
         print("Enter Option : ")
@@ -35,12 +37,9 @@ class SongView {
             return null
         }
 
-        // Ask the user whether they want to see a full list of artists
-        print("Do you wish to see a full list of artists? (Y/N): ")
-        val option = readLine()!!.uppercase()
-        if (option == "Y") {
-            artists.findAll().forEach { artist -> println(artist) }
-        }
+        // List all the artists
+        listAllArtists(artists)
+
         var artistId : Long? = null
         var artist: Artist? = null
         // Do the loop until a valid artist has been found, or the user decides to cancel.
@@ -103,5 +102,37 @@ class SongView {
                 showSongDetails(song, Artist())
             }
         }
+    }
+
+    fun updateSongDetails(songs: SongStore, artists: ArtistStore) : Song? {
+        println("\nUpdate song details.")
+        println("Leave the space blank to not update a field")
+        val song = findSong(songs)
+        if(song != null){
+            print("\nEnter a new title for [${song.title}]: ")
+            var newTitle = readLine()!!
+            if(newTitle.isEmpty()){
+                newTitle = song.title
+            }
+            print("\nEnter a new year for [${song.year}]: ")
+            var newYear = readLine()!!
+            if(newYear.isEmpty()){
+                newYear = song.year
+            }
+            listAllArtists(artists)
+            print("\nEnter a new artist id for [${song.artistId}]: ")
+            val newArtistId = try{
+                readLine()!!.toLong()
+            } catch(exception: NumberFormatException) {
+                song.artistId
+            }
+            println("New Song details: [Title: ${newTitle}, Year: ${newYear}, Artist: [${artists.findOne(newArtistId)}]]")
+            return Song(id = song.id, title = newTitle, year = newYear, artistId = newArtistId)
+        }
+        else{
+            println("Song not found")
+            return null
+        }
+
     }
 }
