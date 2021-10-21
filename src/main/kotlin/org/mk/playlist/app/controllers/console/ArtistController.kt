@@ -1,4 +1,4 @@
-package org.mk.playlist.app.controllers
+package org.mk.playlist.app.controllers.console
 
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.artist.ArtistStore
