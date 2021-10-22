@@ -1,5 +1,6 @@
 package org.mk.playlist.app.views.gui.playlist
 
+import javafx.collections.MapChangeListener
 import javafx.scene.control.TableView
 import org.mk.playlist.app.controllers.gui.PlaylistController
 import org.mk.playlist.app.models.playlist.Playlist
@@ -15,6 +16,13 @@ class PlaylistScreen : View("Playlists") {
 
     private var playlistTable: TableView<Playlist> by singleAssign()
 
+    init {
+        // Add a listener that will update the table whenever a playlist is added/deleted
+        // It does not fire when a playlist is updated, as it only triggers when the map changes.
+        playlistController.playlists.playlistsProperty.addListener(MapChangeListener {
+            data.setAll(playlistController.playlists.findAll().asObservable())
+        })
+    }
     override val root = vbox {
         gridpane {
             row {
@@ -31,7 +39,6 @@ class PlaylistScreen : View("Playlists") {
                         playlistTable.selectionModel.selectedItem?.let {
                             playlistController.deleteOne(it.id)
                         }
-                        refreshTable()
                     }
                 }
                 button("Update Playlist Name") {

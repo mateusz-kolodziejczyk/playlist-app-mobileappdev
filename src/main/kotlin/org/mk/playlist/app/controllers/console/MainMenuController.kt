@@ -30,8 +30,8 @@ class MainMenuController {
     val logger = KotlinLogging.logger {}
 
     init {
-        logger.info { "Launching Placemark Console App" }
-        println("Placemark Kotlin App Version 3.0")
+        logger.info { "Launching Playlist App" }
+        println("Music Playlist Console App v0.6")
     }
 
     fun run() {

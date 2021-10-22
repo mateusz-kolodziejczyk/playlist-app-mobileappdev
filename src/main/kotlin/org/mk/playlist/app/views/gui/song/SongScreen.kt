@@ -4,6 +4,7 @@ import javafx.scene.control.TableView
 import org.mk.playlist.app.controllers.gui.SongController
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.views.gui.main.MainMenuScreen
+import org.mk.playlist.app.views.gui.playlist.UpdatePlaylistScreen
 import tornadofx.*
 
 class SongScreen : View("Songs") {
@@ -30,7 +31,9 @@ class SongScreen : View("Songs") {
                 }
                 button("Update Selected Song") {
                     action{
-
+                        songTable.selectionModel.selectedItem?.let{
+                            find<UpdateSongScreen>(mapOf(UpdateSongScreen::songToUpdate to it)).openWindow()
+                        }
                     }
                 }
 
@@ -41,6 +44,7 @@ class SongScreen : View("Songs") {
             readonlyColumn("ID", Song::id)
             readonlyColumn("Title", Song::title)
             readonlyColumn("Year", Song::year)
+            readonlyColumn("Artist ID", Song::artistId)
         }
         button ("Refresh Table")
         {
@@ -59,3 +63,4 @@ class SongScreen : View("Songs") {
         data.setAll(songController.songs.findAll().asObservable())
     }
 }
+
