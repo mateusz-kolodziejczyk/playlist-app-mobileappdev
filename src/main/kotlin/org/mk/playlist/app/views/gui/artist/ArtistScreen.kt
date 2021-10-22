@@ -1,10 +1,9 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.artist
 
 import javafx.scene.control.TableView
 import org.mk.playlist.app.controllers.gui.ArtistController
-import org.mk.playlist.app.controllers.gui.PlaylistController
 import org.mk.playlist.app.models.artist.Artist
-import org.mk.playlist.app.models.playlist.Playlist
+import org.mk.playlist.app.views.gui.main.MainMenuScreen
 import tornadofx.*
 
 class ArtistScreen : View("Artists") {
@@ -30,7 +29,9 @@ class ArtistScreen : View("Artists") {
                 }
                 button("Update Selected Artist") {
                     action{
-
+                            artistTable.selectionModel.selectedItem?.let {
+                                find<UpdateArtistScreen>(mapOf(UpdateArtistScreen::artistToUpdate to it)).openWindow()
+                            }
                     }
                 }
             }

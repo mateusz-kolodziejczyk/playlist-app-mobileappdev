@@ -1,9 +1,10 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.main
 
 import javafx.application.Platform
 import javafx.geometry.Orientation
-import org.mk.playlist.app.controllers.gui.PlaylistController
-import org.mk.playlist.app.models.artist.Artist
+import org.mk.playlist.app.views.gui.playlist.PlaylistScreen
+import org.mk.playlist.app.views.gui.song.SongScreen
+import org.mk.playlist.app.views.gui.artist.ArtistScreen
 import tornadofx.*
 
 class MainMenuScreen : View("Playlist App") {

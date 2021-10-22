@@ -1,10 +1,11 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.playlist
 
 import javafx.scene.control.TableView
 import org.mk.playlist.app.controllers.gui.PlaylistController
 import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.utilities.songIDsToSongs
+import org.mk.playlist.app.views.gui.main.MainMenuScreen
 import tornadofx.*
 
 class PlaylistScreen : View("Playlists") {
@@ -36,9 +37,7 @@ class PlaylistScreen : View("Playlists") {
                 button("Update Playlist Name") {
                     action{
                         playlistTable.selectionModel.selectedItem?.let {
-                            val updatePlaylistScreen = find(UpdatePlaylistScreen::class)
-                            updatePlaylistScreen.setPlaylistToUpdate(it)
-                            updatePlaylistScreen.openWindow()
+                            find<UpdatePlaylistScreen>(mapOf(UpdatePlaylistScreen::playlistToUpdate to it)).openWindow()
                         }
                     }
                 }

@@ -1,21 +1,24 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.artist
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
-import org.mk.playlist.app.controllers.gui.PlaylistController
-import org.mk.playlist.app.models.song.Song
+import org.mk.playlist.app.controllers.gui.ArtistController
 import tornadofx.*
 
-class AddSongScreen : View("Add Song") {
+class AddArtistScreen : View("Add Artist") {
     private val model = ViewModel()
-    private val playlistController: PlaylistController by inject()
-    var currentSong : Song? = null
-    private val _name = model.bind { SimpleStringProperty() }
+    private val artistController: ArtistController by inject()
+    private val _firstName = model.bind { SimpleStringProperty() }
+    private val _lastName = model.bind { SimpleStringProperty() }
+
     override val root = form {
         setPrefSize(800.0, 400.0)
         fieldset(labelPosition = Orientation.VERTICAL) {
-            field("Name") {
-                textfield(_name).required()
+            field("First Name") {
+                textfield(_firstName).required()
+            }
+            field("Last Name") {
+                textfield(_lastName).required()
             }
             button("Add"){
                 enableWhen(model.valid)
@@ -23,7 +26,7 @@ class AddSongScreen : View("Add Song") {
                 useMaxWidth = true
                 action{
                     runAsyncWithProgress {
-                        playlistController.add(_name.value)
+                        artistController.add(_firstName.value, _lastName.value)
                     }
                 }
             }
@@ -31,8 +34,7 @@ class AddSongScreen : View("Add Song") {
                 useMaxWidth = true
                 isDefaultButton = true
                 action{
-                    println(currentSong)
-                    replaceWith(SongScreen::class, sizeToScene = true, centerOnScreen = true)
+                    replaceWith(ArtistScreen::class, sizeToScene = true, centerOnScreen = true)
                 }
             }
         }

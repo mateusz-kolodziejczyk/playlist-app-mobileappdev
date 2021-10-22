@@ -1,44 +1,41 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.song
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
 import org.mk.playlist.app.controllers.gui.PlaylistController
-import org.mk.playlist.app.models.playlist.Playlist
+import org.mk.playlist.app.models.song.Song
 import tornadofx.*
 
-class UpdatePlaylistScreen : View("Update Playlist")
-{private val model = ViewModel()
+class AddSongScreen : View("Add Song") {
+    private val model = ViewModel()
     private val playlistController: PlaylistController by inject()
+    var currentSong : Song? = null
     private val _name = model.bind { SimpleStringProperty() }
-    private var playlistToUpdate: Playlist = Playlist()
     override val root = form {
         setPrefSize(800.0, 400.0)
         fieldset(labelPosition = Orientation.VERTICAL) {
             field("Name") {
                 textfield(_name).required()
             }
-            button("Update") {
+            button("Add"){
                 enableWhen(model.valid)
                 isDefaultButton = true
                 useMaxWidth = true
-                action {
+                action{
                     runAsyncWithProgress {
-                        playlistController.update(Playlist(id = playlistToUpdate.id, name = _name.value, songs = playlistToUpdate.songs ))
-                        close()
+                        playlistController.add(_name.value)
                     }
                 }
             }
-            button("Close") {
+            button("Close"){
                 useMaxWidth = true
                 isDefaultButton = true
-                action {
-                    close()
+                action{
+                    println(currentSong)
+                    replaceWith(SongScreen::class, sizeToScene = true, centerOnScreen = true)
                 }
             }
         }
-    }
-    fun setPlaylistToUpdate(playlist: Playlist){
-        playlistToUpdate = playlist
-        _name.value = playlist.name
+
     }
 }

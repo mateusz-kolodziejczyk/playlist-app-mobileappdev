@@ -1,10 +1,9 @@
-package org.mk.playlist.app.views.gui
+package org.mk.playlist.app.views.gui.song
 
 import javafx.scene.control.TableView
-import org.mk.playlist.app.controllers.gui.PlaylistController
 import org.mk.playlist.app.controllers.gui.SongController
-import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.song.Song
+import org.mk.playlist.app.views.gui.main.MainMenuScreen
 import tornadofx.*
 
 class SongScreen : View("Songs") {

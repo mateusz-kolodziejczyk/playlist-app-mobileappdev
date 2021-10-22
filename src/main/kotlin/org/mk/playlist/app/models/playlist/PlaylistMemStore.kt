@@ -1,7 +1,6 @@
 package org.mk.playlist.app.models.playlist
 
 import mu.KotlinLogging
-import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.utilities.logAll
 
