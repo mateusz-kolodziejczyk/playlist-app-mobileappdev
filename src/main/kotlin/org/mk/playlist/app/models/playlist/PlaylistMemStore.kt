@@ -12,11 +12,12 @@ private fun getId(): Long {
 }
 
 class PlaylistMemStore : PlaylistStore {
-    var playlists: HashMap<Long, Playlist> = HashMap()
-    override fun add(playlist: Playlist) {
+    private var playlists: HashMap<Long, Playlist> = HashMap()
+    override fun add(playlist: Playlist) : Long{
         playlist.id = getId()
         playlists[playlist.id] = playlist
         logAll(playlists.values, logger)
+        return playlist.id
     }
 
     override fun addToPlaylist(id: Long, song: Song): Boolean {
@@ -56,9 +57,9 @@ class PlaylistMemStore : PlaylistStore {
 
     // This function works alongside the remove song function in SongStore to remove any instance of a song
     // that was removed
-    override fun deleteSongFromAll(id: Long) {
+    override fun deleteSongFromAll(songID: Long) {
         for(playlist in playlists.values){
-            playlist.songs.remove(id)
+            playlist.songs.remove(songID)
         }
     }
 

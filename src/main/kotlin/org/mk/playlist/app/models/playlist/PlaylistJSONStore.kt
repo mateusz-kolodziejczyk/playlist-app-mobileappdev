@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import javafx.collections.ObservableMap
 import mu.KotlinLogging
-import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.utilities.*
 import tornadofx.*
 
@@ -26,11 +25,12 @@ class PlaylistJSONStore : PlaylistStore {
         }
     }
 
-    override fun add(playlist: Playlist) {
+    override fun add(playlist: Playlist) : Long {
         playlist.id = generateRandomId()
         playlists[playlist.id] = playlist
         logAll(playlists.values, logger)
         serialize()
+        return playlist.id
     }
 
     override fun addToPlaylist(id: Long, song: Song): Boolean {
@@ -72,10 +72,10 @@ class PlaylistJSONStore : PlaylistStore {
 
     // This function works alongside the remove song function in SongStore to remove any instance of a song
     // that was removed
-    override fun deleteSongFromAll(id: Long) {
+    override fun deleteSongFromAll(songID: Long) {
         for(playlist in playlists.values){
-            playlist.songs.forEach { println("Current Song ID: [$it], Looking for [$id]") }
-            playlist.songs.remove(id)
+            playlist.songs.forEach { println("Current Song ID: [$it], Looking for [$songID]") }
+            playlist.songs.remove(songID)
         }
         serialize()
     }

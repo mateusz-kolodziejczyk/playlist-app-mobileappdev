@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import mu.KotlinLogging
-import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.utilities.*
 
 private val logger = KotlinLogging.logger {}
@@ -23,7 +22,7 @@ class SongJSONStore : SongStore {
         }
     }
 
-    override fun add(song: Song){
+    override fun add(song: Song): Long {
         song.id = generateRandomId()
         songs[song.id] = song
         logAll(songs.values, logger)

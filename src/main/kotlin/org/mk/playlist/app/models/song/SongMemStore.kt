@@ -12,10 +12,11 @@ class SongMemStore : SongStore {
     // Use a map with K,V ID, Artist to make retrieval easier.
     val songs : HashMap<Long,Song> = HashMap()
 
-    override fun add(song: Song){
+    override fun add(song: Song): Long {
         song.id = getId()
         songs[song.id] = song
         logAll(songs.values, logger)
+        return 
     }
     override fun findAll() : ArrayList<Song>{
         return ArrayList(songs.values)
