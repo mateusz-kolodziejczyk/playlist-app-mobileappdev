@@ -56,6 +56,7 @@ class ArtistController {
             // Delete all playlists containing songs by this artist,
             // then delete all songs by this artist before deleting it
             val songsToDelete = songs.filter { it.artistId == artist.id }
+
             for (song in songsToDelete) {
                 // Delete from playlists then delete the song
                 playlists.deleteSongFromAll(song.id)

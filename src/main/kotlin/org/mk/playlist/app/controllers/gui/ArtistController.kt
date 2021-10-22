@@ -18,14 +18,7 @@ class ArtistController : Controller() {
         artists.add(Artist(firstName = firstName, lastName = lastName))
     }
 
-    // Delete all instances of songs by this artists in playlists, then all their songs, then the artist itself.
     fun deleteOne(id: Long) {
-        val songsToDelete = songs.filter { it.artistId == id }
-        for (song in songsToDelete) {
-            // Delete from playlists then delete the song
-            playlists.deleteSongFromAll(song.id)
-            songs.deleteOne(song.id)
-        }
         artists.deleteOne(id)
     }
 

@@ -24,6 +24,12 @@ class SongController : Controller() {
         songs.deleteOne(id)
     }
 
+    // Delete songs if they are by a particular artist
+    fun deleteByArtist(artistID: Long){
+        val songsToDelete = songs.filter { it.artistId == artistID }
+        songsToDelete.forEach{songs.deleteOne(it.id)}
+    }
+
     fun update(song: Song){
         songs.update(song)
     }

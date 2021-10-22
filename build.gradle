@@ -2,10 +2,11 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.5.10'
     id 'java'
     id 'application'
+    id 'edu.sc.seis.launch4j' version '2.4.9'
 }
 
 group 'org.mk.playlist'
-version '0.6 ALPHA'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -13,7 +14,7 @@ repositories {
 }
 
 application {
-    mainClass = 'org.mk.playlist.app.main.MainKt'
+    mainClass = 'org.mk.playlist.app.main.MainAppKt'
 }
 
 dependencies {
@@ -29,4 +30,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+compileKotlin {
+    kotlinOptions.jvmTarget= 1.8
 }

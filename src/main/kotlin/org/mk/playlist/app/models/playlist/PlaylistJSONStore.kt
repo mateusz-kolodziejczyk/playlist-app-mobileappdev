@@ -74,6 +74,7 @@ class PlaylistJSONStore : PlaylistStore {
     // that was removed
     override fun deleteSongFromAll(id: Long) {
         for(playlist in playlists.values){
+            playlist.songs.forEach { println("Current Song ID: [$it], Looking for [$id]") }
             playlist.songs.remove(id)
         }
         serialize()

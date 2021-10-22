@@ -20,9 +20,8 @@ class AddPlaylistScreen : View("Add Playlist") {
                 isDefaultButton = true
                 useMaxWidth = true
                 action{
-                    runAsyncWithProgress {
-                        playlistController.add(_name.value)
-                    }
+                    playlistController.add(_name.value)
+                    replaceWith(PlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
                 }
             }
             button("Close"){

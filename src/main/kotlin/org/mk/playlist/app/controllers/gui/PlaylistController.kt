@@ -24,5 +24,8 @@ class PlaylistController : Controller() {
         playlists.update(playlist)
     }
 
+    fun deleteSongFromPlaylists(songID: Long){
+        playlists.deleteSongFromAll(songID)
+    }
 
 }

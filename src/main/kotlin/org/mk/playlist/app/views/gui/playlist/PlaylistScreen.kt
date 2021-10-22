@@ -16,13 +16,8 @@ class PlaylistScreen : View("Playlists") {
 
     private var playlistTable: TableView<Playlist> by singleAssign()
 
-    init {
-        // Add a listener that will update the table whenever a playlist is added/deleted
-        // It does not fire when a playlist is updated, as it only triggers when the map changes.
-        playlistController.playlists.playlistsProperty.addListener(MapChangeListener {
-            data.setAll(playlistController.playlists.findAll().asObservable())
-        })
-    }
+
+
     override val root = vbox {
         gridpane {
             row {
@@ -79,6 +74,15 @@ class PlaylistScreen : View("Playlists") {
                 replaceWith(MainMenuScreen::class, sizeToScene = true, centerOnScreen = true)
             }
         }
+    }
+
+    init {
+        // Add a listener that will update the table whenever a playlist is added/deleted
+        // It does not fire when a playlist is updated, as it only triggers when the map changes.
+        playlistController.playlists.playlists.addListener(MapChangeListener {
+            data.setAll(playlistController.playlists.findAll().asObservable())
+            println("Did Something!")
+        })
     }
 
     private fun refreshTable() {
