@@ -17,8 +17,7 @@ class SongScreen : View("Songs") {
             row{
                 button ("Add Song") {
                     action{
-                        find(AddSongScreen::class).currentSong = songTable.selectionModel.selectedItem
-                        replaceWith(AddSongScreen::class, sizeToScene = true, centerOnScreen = true)
+                        find<AddSongScreen>().openWindow()
                     }
                 }
                 button ("Delete Song") {

@@ -13,6 +13,7 @@ class PlaylistController : Controller() {
 
     fun add(name: String){
         playlists.add(playlist = Playlist(name = name))
+        print(playlists.playlistsProperty.values.size)
     }
 
     fun deleteOne(id: Long) {
@@ -22,4 +23,6 @@ class PlaylistController : Controller() {
     fun update(playlist: Playlist){
         playlists.update(playlist)
     }
+
+
 }

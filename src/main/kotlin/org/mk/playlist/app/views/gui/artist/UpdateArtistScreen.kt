@@ -14,6 +14,7 @@ class UpdateArtistScreen : Fragment("Update Artist") {
     private val _lastName = model.bind { SimpleStringProperty() }
     var artistToUpdate:Artist? = null
 
+    // Use this to populate the fields with the existing values from the selected artist
     init {
         artistToUpdate = params["artistToUpdate"] as? Artist
         artistToUpdate?.let {

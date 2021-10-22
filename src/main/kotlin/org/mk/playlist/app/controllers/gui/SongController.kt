@@ -14,8 +14,8 @@ class SongController : Controller() {
     val songs = SongJSONStore()
     val artists = ArtistJSONStore()
     val playlists = PlaylistJSONStore()
-    fun add(title: String){
-        TODO()
+    fun add(title: String, year: String, artistID: Long){
+        songs.add(Song(title = title, year = year, artistId = artistID))
     }
 
     // Delete song from all playlists, then remove the song itself.

@@ -4,9 +4,11 @@ import org.mk.playlist.app.models.song.Song
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import javafx.collections.ObservableMap
 import mu.KotlinLogging
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.utilities.*
+import tornadofx.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -15,7 +17,8 @@ val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting().create()
 val listType = object : TypeToken<java.util.HashMap<Long, Playlist>>() {}.type
 
 class PlaylistJSONStore : PlaylistStore {
-    private var playlists: HashMap<Long, Playlist> = HashMap()
+    var playlists by property<ObservableMap<Long, Playlist>>()
+    val playlistsProperty = mapProperty(playlists)
 
     init {
         if (exists(JSON_FILE)) {
@@ -99,13 +102,18 @@ class PlaylistJSONStore : PlaylistStore {
         // Simple filter to find all playlists containing a particular song
         return playlists.values.filter { playlist -> playlist.songs.contains(songID) }
     }
+    // Serialize and deserialize are changed to fit having playlists stored as a property, now have to cast them
+    // into hashmaps to serialize/deserialize them from disk.
     private fun serialize() {
+        val playlistHashMap = HashMap<Long, Playlist>()
+        playlists.keys.forEach{key -> playlistHashMap[key] = playlists[key]!!}
         val jsonString = gsonBuilder.toJson(playlists, listType)
         write(JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
         val jsonString = read(JSON_FILE)
-        playlists = Gson().fromJson(jsonString, listType)
+        var playlistsHashMap : HashMap<Long, Playlist> = Gson().fromJson(jsonString, listType)
+        playlists = playlistsHashMap.asObservable()
     }
 }
