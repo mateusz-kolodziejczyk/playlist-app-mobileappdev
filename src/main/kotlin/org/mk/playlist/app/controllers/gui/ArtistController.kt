@@ -28,4 +28,8 @@ class ArtistController : Controller() {
         }
         artists.deleteOne(id)
     }
+
+    fun update(artist: Artist){
+        artists.update(artist)
+    }
 }

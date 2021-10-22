@@ -1,6 +1,7 @@
 package org.mk.playlist.app.controllers.gui
 
 import mu.KotlinLogging
+import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.playlist.PlaylistJSONStore
 import org.mk.playlist.app.models.song.SongJSONStore
@@ -17,5 +18,9 @@ class PlaylistController : Controller() {
 
     fun deleteOne(id: Long) {
         playlists.deleteOne(id)
+    }
+
+    fun update(playlist: Playlist){
+        playlists.update(playlist)
     }
 }

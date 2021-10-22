@@ -7,7 +7,7 @@ import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.playlist.Playlist
 import tornadofx.*
 
-class ArtistScreen : View("My View") {
+class ArtistScreen : View("Artists") {
     private val artistController: ArtistController by inject()
     private val tableContent = artistController.artists.findAll()
     private val data = tableContent.asObservable()
@@ -22,7 +22,15 @@ class ArtistScreen : View("My View") {
                 }
                 button ("Delete Selected Artist") {
                     action {
-                        artistController.deleteOne(artistTable.selectionModel.selectedItem.id)
+                        artistTable.selectionModel.selectedItem?.let {
+                            artistController.deleteOne(it.id)
+                        }
+                        refreshTable()
+                    }
+                }
+                button("Update Selected Artist") {
+                    action{
+
                     }
                 }
             }
@@ -36,7 +44,7 @@ class ArtistScreen : View("My View") {
         button ("Refresh Table")
         {
             action {
-                data.setAll(artistController.artists.findAll().asObservable())
+                refreshTable()
             }
         }
         button("Quit to Main Menu") {
@@ -45,5 +53,8 @@ class ArtistScreen : View("My View") {
                 replaceWith(MainMenuScreen::class, sizeToScene = true, centerOnScreen = true)
             }
         }
+    }
+    private fun refreshTable() {
+        data.setAll(artistController.artists.findAll().asObservable())
     }
 }

@@ -2,23 +2,20 @@ package org.mk.playlist.app.views.gui
 
 import javafx.beans.property.SimpleStringProperty
 import javafx.geometry.Orientation
-import org.mk.playlist.app.controllers.gui.ArtistController
+import org.mk.playlist.app.controllers.gui.PlaylistController
+import org.mk.playlist.app.models.song.Song
 import tornadofx.*
 
-class AddArtistScreen : View("Add Artist") {
+class AddSongScreen : View("Add Song") {
     private val model = ViewModel()
-    private val artistController: ArtistController by inject()
-    private val _firstName = model.bind { SimpleStringProperty() }
-    private val _lastName = model.bind { SimpleStringProperty() }
-
+    private val playlistController: PlaylistController by inject()
+    var currentSong : Song? = null
+    private val _name = model.bind { SimpleStringProperty() }
     override val root = form {
         setPrefSize(800.0, 400.0)
         fieldset(labelPosition = Orientation.VERTICAL) {
-            field("First Name") {
-                textfield(_firstName).required()
-            }
-            field("Last Name") {
-                textfield(_lastName).required()
+            field("Name") {
+                textfield(_name).required()
             }
             button("Add"){
                 enableWhen(model.valid)
@@ -26,7 +23,7 @@ class AddArtistScreen : View("Add Artist") {
                 useMaxWidth = true
                 action{
                     runAsyncWithProgress {
-                        artistController.add(_firstName.value, _lastName.value)
+                        playlistController.add(_name.value)
                     }
                 }
             }
@@ -34,7 +31,8 @@ class AddArtistScreen : View("Add Artist") {
                 useMaxWidth = true
                 isDefaultButton = true
                 action{
-                    replaceWith(ArtistScreen::class, sizeToScene = true, centerOnScreen = true)
+                    println(currentSong)
+                    replaceWith(SongScreen::class, sizeToScene = true, centerOnScreen = true)
                 }
             }
         }

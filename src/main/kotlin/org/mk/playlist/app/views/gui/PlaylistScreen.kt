@@ -1,11 +1,7 @@
 package org.mk.playlist.app.views.gui
 
-import javafx.application.Platform
-import javafx.geometry.Orientation
 import javafx.scene.control.TableView
-import javafx.scene.layout.GridPane
 import org.mk.playlist.app.controllers.gui.PlaylistController
-import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.song.Song
 import org.mk.playlist.app.utilities.songIDsToSongs
@@ -16,7 +12,7 @@ class PlaylistScreen : View("Playlists") {
     private val tableContent = playlistController.playlists.findAll()
     private val data = tableContent.asObservable()
 
-    private lateinit var playlistTable: TableView<Playlist>
+    private var playlistTable: TableView<Playlist> by singleAssign()
 
     override val root = vbox {
         gridpane {
@@ -31,8 +27,19 @@ class PlaylistScreen : View("Playlists") {
                 button("Delete Selected Playlist")
                 {
                     action {
-                        playlistController.deleteOne(playlistTable.selectionModel.selectedItem.id)
-                        refreshPlaylistTable()
+                        playlistTable.selectionModel.selectedItem?.let {
+                            playlistController.deleteOne(it.id)
+                        }
+                        refreshTable()
+                    }
+                }
+                button("Update Playlist Name") {
+                    action{
+                        playlistTable.selectionModel.selectedItem?.let {
+                            val updatePlaylistScreen = find(UpdatePlaylistScreen::class)
+                            updatePlaylistScreen.setPlaylistToUpdate(it)
+                            updatePlaylistScreen.openWindow()
+                        }
                     }
                 }
             }
@@ -57,7 +64,7 @@ class PlaylistScreen : View("Playlists") {
         button("Refresh Table")
         {
             action {
-                refreshPlaylistTable()
+                refreshTable()
             }
         }
         button("Quit to Main Menu") {
@@ -68,7 +75,7 @@ class PlaylistScreen : View("Playlists") {
         }
     }
 
-    fun refreshPlaylistTable() {
+    private fun refreshTable() {
         data.setAll(playlistController.playlists.findAll().asObservable())
     }
 }
