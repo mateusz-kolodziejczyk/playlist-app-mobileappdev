@@ -24,8 +24,7 @@ class PlaylistScreen : View("Playlists") {
                 button("Add Playlist")
                 {
                     action {
-                        // println(playlistController.playlists.deleteSongFromOne(playlistTable.selectionModel.selectedItem.id))
-                        replaceWith(AddPlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
+                        find<AddPlaylistScreen>().openWindow()
                     }
                 }
                 button("Delete Selected Playlist")

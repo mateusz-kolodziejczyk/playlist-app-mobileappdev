@@ -5,7 +5,7 @@ import javafx.geometry.Orientation
 import org.mk.playlist.app.controllers.gui.PlaylistController
 import tornadofx.*
 
-class AddPlaylistScreen : View("Add Playlist") {
+class AddPlaylistScreen : Fragment("Add Playlist") {
     private val model = ViewModel()
     private val playlistController: PlaylistController by inject()
     private val _name = model.bind { SimpleStringProperty()}
@@ -21,14 +21,14 @@ class AddPlaylistScreen : View("Add Playlist") {
                 useMaxWidth = true
                 action{
                     playlistController.add(_name.value)
-                    replaceWith(PlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
+                    close()
                 }
             }
             button("Close"){
                 useMaxWidth = true
                 isDefaultButton = true
                 action{
-                    replaceWith(PlaylistScreen::class, sizeToScene = true, centerOnScreen = true)
+                    close()
                 }
             }
         }

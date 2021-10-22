@@ -27,6 +27,7 @@ class SongJSONStore : SongStore {
         songs[song.id] = song
         logAll(songs.values, logger)
         serialize()
+        return song.id
     }
     override fun findAll() : ArrayList<Song>{
         return ArrayList(songs.values)

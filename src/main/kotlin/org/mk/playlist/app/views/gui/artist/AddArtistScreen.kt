@@ -5,7 +5,7 @@ import javafx.geometry.Orientation
 import org.mk.playlist.app.controllers.gui.ArtistController
 import tornadofx.*
 
-class AddArtistScreen : View("Add Artist") {
+class AddArtistScreen : Fragment("Add Artist") {
     private val model = ViewModel()
     private val artistController: ArtistController by inject()
     private val _firstName = model.bind { SimpleStringProperty() }
@@ -34,7 +34,7 @@ class AddArtistScreen : View("Add Artist") {
                 useMaxWidth = true
                 isDefaultButton = true
                 action{
-                    replaceWith(ArtistScreen::class, sizeToScene = true, centerOnScreen = true)
+                    close()
                 }
             }
         }

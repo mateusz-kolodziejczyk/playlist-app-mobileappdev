@@ -9,9 +9,9 @@ import org.mk.playlist.app.models.song.Song
 
 // Only testing the memory store version as Json would save these playlists to files in testing.
 // Memory store methods are all identical to json ones aside from the added file IO
-internal class PlaylistMemStoreTest {
+internal class PlaylistStoreTest {
 
-    private var playlistMemStore = PlaylistMemStore()
+    private var playlistMemStore:PlaylistStore = PlaylistMemStore()
     private val playlistsToInit = mutableListOf<Playlist>(Playlist(id=0, name="Playlist One"), Playlist(id=1, name="Playlist Two"), Playlist(id=2, name="Playlist Three"))
     // Song to add
     val songToAdd = Song(id=0L, title = "New Song", year = "2021", artistId = 1L)

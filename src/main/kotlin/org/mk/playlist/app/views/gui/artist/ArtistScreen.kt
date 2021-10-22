@@ -6,6 +6,7 @@ import org.mk.playlist.app.controllers.gui.PlaylistController
 import org.mk.playlist.app.controllers.gui.SongController
 import org.mk.playlist.app.models.artist.Artist
 import org.mk.playlist.app.views.gui.main.MainMenuScreen
+import org.mk.playlist.app.views.gui.song.AddSongScreen
 import tornadofx.*
 
 class ArtistScreen : View("Artists") {
@@ -20,7 +21,7 @@ class ArtistScreen : View("Artists") {
             row{
                 button ("Add Artist") {
                     action {
-                        replaceWith(AddArtistScreen::class, centerOnScreen = true, sizeToScene = true)
+                        find<AddArtistScreen>().openWindow()
                     }
                 }
                 button ("Delete Selected Artist") {
