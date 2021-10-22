@@ -43,6 +43,13 @@ class PlaylistScreen : View("Playlists") {
                         }
                     }
                 }
+                button("Update Playlist Songs"){
+                    action {
+                        playlistTable.selectionModel.selectedItem?.let{
+                            find<UpdatePlaylistSongsScreen>(mapOf(UpdatePlaylistSongsScreen::playlistToUpdate to it)).openWindow()
+                        }
+                    }
+                }
             }
 
         }
