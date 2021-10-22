@@ -33,7 +33,7 @@ class MainMenuController {
         logger.info { "Launching Music Playlist App" }
         println("Music Playlist App Version 0.6 ALPHA")
     }
-    
+
     fun run() {
         var option = 0
         do {

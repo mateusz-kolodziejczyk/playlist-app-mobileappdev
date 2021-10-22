@@ -37,7 +37,7 @@ class UpdateSongScreen : Fragment("Update Song") {
                 }
 
             }
-            button("Add"){
+            button("Update"){
                 enableWhen(model.valid)
                 isDefaultButton = true
                 useMaxWidth = true
