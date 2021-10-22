@@ -22,11 +22,12 @@ class ArtistJSONStore : ArtistStore {
         }
     }
 
-    override fun add(artist: Artist){
+    override fun add(artist: Artist): Long {
         artist.id = generateRandomId()
         artists[artist.id] = artist
         logAll(artists.values, logger)
         serialize()
+        return artist.id
     }
 
     override fun isEmpty() : Boolean{

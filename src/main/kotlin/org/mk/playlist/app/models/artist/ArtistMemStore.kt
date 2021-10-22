@@ -10,11 +10,12 @@ private fun getId(): Long {
 }
 class ArtistMemStore : ArtistStore {
     // Use a map with K,V ID, Artist to make retrieval easier.
-    val artists : HashMap<Long,Artist> = HashMap()
-    override fun add(artist: Artist){
+    private val artists : HashMap<Long,Artist> = HashMap()
+    override fun add(artist: Artist): Long {
         artist.id = getId()
         artists[artist.id] = artist
         logAll(artists.values, logger)
+        return artist.id
     }
 
     override fun isEmpty() : Boolean{

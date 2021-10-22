@@ -2,10 +2,11 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.5.10'
     id 'java'
     id 'application'
+    id 'edu.sc.seis.launch4j' version '2.4.9'
 }
 
 group 'org.mk.playlist'
-version '0.6 ALPHA'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -13,18 +14,24 @@ repositories {
 }
 
 application {
-    mainClass = 'org.mk.playlist.app.main.MainKt'
+    mainClass = 'org.mk.playlist.app.main.MainAppKt'
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'no.tornado:tornadofx:1.7.20'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "com.google.code.gson:gson:2.8.5"
     implementation 'org.slf4j:slf4j-simple:1.6.1'
     implementation 'io.github.microutils:kotlin-logging:1.6.22'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
 test {
     useJUnitPlatform()
+}
+compileKotlin {
+    kotlinOptions.jvmTarget= 1.8
 }

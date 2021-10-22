@@ -1,6 +1,6 @@
 package org.mk.playlist.app.main
 
-import org.mk.playlist.app.controllers.MainMenuController
+import org.mk.playlist.app.controllers.console.MainMenuController
 
 fun main() {
     val mainMenuController = MainMenuController()

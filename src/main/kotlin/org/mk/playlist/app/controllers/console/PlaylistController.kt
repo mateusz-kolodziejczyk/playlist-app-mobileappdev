@@ -1,10 +1,9 @@
-package org.mk.playlist.app.controllers
+package org.mk.playlist.app.controllers.console
 
 import mu.KotlinLogging
 import org.mk.playlist.app.models.playlist.Playlist
 import org.mk.playlist.app.models.playlist.PlaylistStore
 import org.mk.playlist.app.models.song.SongStore
-import org.mk.playlist.app.utilities.getId
 import org.mk.playlist.app.utilities.listAllSongs
 import org.mk.playlist.app.views.console.PlaylistView
 
