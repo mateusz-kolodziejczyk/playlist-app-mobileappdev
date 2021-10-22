@@ -95,7 +95,7 @@ class SongController {
         val year = view.getYear()
         val songList = songs.filter { it.year == year }
         println("Songs from $year: ")
-        songList.forEach { song -> println("${song.id}: ${song.title} by [${artists.findOne(song.id)}]") }
+        songList.forEach { song -> println("${song.id}: ${song.title} by [${artists.findOne(song.artistId)}]") }
     }
 
     private fun findAllByArtist() {
@@ -108,7 +108,7 @@ class SongController {
             if (artist != null) {
                 println("Songs by [${artists.findOne(artistId)}]: ")
                 val songList = songs.filter { it.artistId == artistId }
-                songList.forEach { song -> println("${song.id}: ${song.title} by [${artists.findOne(song.id)}]") }
+                songList.forEach { song -> println("${song.id}: ${song.title} by [${artists.findOne(artistId)}]") }
             }
         }
     }
